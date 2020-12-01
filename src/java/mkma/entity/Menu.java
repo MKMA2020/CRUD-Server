@@ -1,21 +1,30 @@
 package mkma.entity;
 
+import java.io.Serializable;
+
 /**
  *Claas for the menu and I'ts methods
  * @author 2dam
  */
-public class Menu {
-    private Long id_menu;
+@Entity
+@Table (name="menu", schema="mkma")
+public class Menu implements Serializable{
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue( strategy = GenerationType.AUTO )
+    private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private menuType menuType;
     
    
-    public Long getId_menu() {
-        return id_menu;
+    public Long getId() {
+        return id;
     }
 
     public void setId_menu(Long id_Ingredient) {
-        this.id_menu = id_menu;
+        this.id = id;
     }
 
     public String getName() {
@@ -49,3 +58,4 @@ enum menuType {
     Snack,
     Dinner
 }
+
