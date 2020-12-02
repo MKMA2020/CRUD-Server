@@ -1,5 +1,12 @@
 package mkma.entity;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 /**
@@ -7,50 +14,70 @@ import java.sql.Timestamp;
  *
  * @author Aitor Garcia
  */
-public class User {
-    
+@Entity
+@Table(name = "user", schema = "mkam")
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * id Will contain the ID of the User.
      */
-    private long Id_user;
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     /**
      * login Will contain the login String of the User.
      */
+    @NotNull
     private String login;
-    
+
     /**
      * email Will contain the E-mail of the User.
      */
+    @NotNull
     private String email;
-    
+
     /**
      * fullName Will contain the Full Name of the User.
      */
+    @NotNull
     private String fullName;
-    
+
     /**
      * status Will contain the status (Active or Inactive) of the User.
      */
+    @NotNull
     private Boolean status;
-    
+
     /**
      * password Will contain the password of the User.
      */
+    @NotNull
     private String password;
-    
+
     /**
      * lastAccess Will contain the Last Access Timestamp of the User.
      */
+    @NotNull
     private Timestamp lastAccess;
-    
+
     /**
-     * lastsPasswordChange Will contain the Last Password Change Timestamp of the User.
+     * lastsPasswordChange Will contain the Last Password Change Timestamp of
+     * the User.
      */
+    @NotNull
     private Timestamp lastsPasswordChange;
 
+    /**
+     * type will contain the different types of users
+     */
+    @NotNull
+    private userType type;
+
     public long getId_user() {
-        return Id_user;
+        return id;
     }
 
     public String getLogin() {
@@ -81,8 +108,12 @@ public class User {
         return lastsPasswordChange;
     }
 
+    public userType getType() {
+        return type;
+    }
+
     public void setId_user(long Id_user) {
-        this.Id_user = Id_user;
+        this.id = Id_user;
     }
 
     public void setLogin(String login) {
@@ -113,4 +144,42 @@ public class User {
         this.lastsPasswordChange = lastsPasswordChange;
     }
 
+    public void setType(userType type) {
+        this.type = type;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof User)) {
+            return false;
+        }
+        User other = (User) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "mkma.entity.User[ id=" + id + " ]";
+    }
+
+}
+
+/**
+ * userType enum that contains the different types of users
+ */
+enum userType {
+    Normal,
+    Premium,
+    Admin
 }
