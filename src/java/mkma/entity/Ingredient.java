@@ -1,10 +1,15 @@
 package mkma.entity;
 
 import java.io.Serializable;
+import java.util.Set;
+import static javax.persistence.CascadeType.MERGE;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.EAGER;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -37,7 +42,10 @@ public class Ingredient implements Serializable  {
      */
     @NotNull
     private IngredientType type;
-
+    
+    @ManyToMany (mappedBy = "ingredients", cascade=MERGE,fetch=EAGER)
+    private Set<Recipe> recipes;
+    
     public long getId() {
         return id;
     }

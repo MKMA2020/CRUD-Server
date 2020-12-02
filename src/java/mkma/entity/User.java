@@ -1,6 +1,10 @@
 package mkma.entity;
 
 import java.sql.Timestamp;
+import java.util.Set;
+import static javax.persistence.FetchType.EAGER;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  * Class containing the information of a registered user.
@@ -48,6 +52,11 @@ public class User {
      * lastsPasswordChange Will contain the Last Password Change Timestamp of the User.
      */
     private Timestamp lastsPasswordChange;
+    
+    @OneToMany(mappedBy = "user", fetch=EAGER)
+    private Set<Recipe> recipes;
+    
+    
 
     public long getId_user() {
         return Id_user;

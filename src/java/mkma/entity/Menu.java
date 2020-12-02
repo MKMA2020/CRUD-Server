@@ -1,10 +1,13 @@
 package mkma.entity;
 
 import java.io.Serializable;
+import java.util.Set;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -35,6 +38,8 @@ public class Menu implements Serializable{
      */
     @NotNull
     private menuType type;
+    @OneToMany (cascade = ALL , mappedBy = "menus")
+    private Set<Menu_Recipe> menurecipes;
     
    
     public Long getId() {
