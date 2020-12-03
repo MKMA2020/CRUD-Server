@@ -46,6 +46,9 @@ public class Ingredient implements Serializable  {
     @ManyToMany (mappedBy = "ingredients", cascade=MERGE,fetch=EAGER)
     private Set<Recipe> recipes;
     
+    @ManyToOne
+    private User user;
+    
     public long getId() {
         return id;
     }

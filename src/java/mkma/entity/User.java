@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
  * @author Aitor Garcia
  */
 @Entity
-@Table(name = "user", schema = "mkam")
+@Table(name = "user", schema = "mkma")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,7 +77,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch=EAGER)
     private Set<Recipe> recipes;
     
+    @OneToMany(mappedBy = "user", fetch=EAGER)
+    private Set<Menu> menus;
     
+    @OneToMany(mappedBy = "user", fetch=EAGER)
+    private Set<Ingredient> ingredients;
 
     /**
      * type will contain the different types of users

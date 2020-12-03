@@ -6,7 +6,6 @@
 package mkma.entity;
 
 import java.io.Serializable;
-import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,42 +17,42 @@ import javax.persistence.Table;
 
 /**
  *
- * @author 2dam
+ * @author Aitor & Kerman
  */
 @Entity
-@Table (name = "menu_recipe", schema="mkma")
-public class Menu_Recipe implements Serializable {
+@Table (name = "user_recipe", schema="mkma")
+public class User_Recipe implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private User_RecipeId id;
     
-    private Menu_RecipeId id;
-    
-    @MapsId("menuId")
+    @MapsId("userId")
     @ManyToOne
-    private Menu menus;
+    private User users;
     
     @MapsId("recipeId")
     @ManyToOne
     private Recipe recipes;
     
-    private menu_recipeType type;
+    private String comment;
+    private float rating;
 
-    public Menu_RecipeId getId() {
-         return id;
+    public User_RecipeId getId() {
+        return id;
     }
 
-    public void setId(Menu_RecipeId id) {
+    public void setId(User_RecipeId id) {
         this.id = id;
     }
 
-    public Menu getMenus() {
-        return menus;
+    public User getUsers() {
+        return users;
     }
 
-    public void setMenus(Menu menus) {
-        this.menus = menus;
+    public void setUsers(User users) {
+        this.users = users;
     }
 
     public Recipe getRecipes() {
@@ -64,14 +63,22 @@ public class Menu_Recipe implements Serializable {
         this.recipes = recipes;
     }
 
-    public menu_recipeType getType() {
-        return type;
+    public String getComment() {
+        return comment;
     }
 
-    public void setType(menu_recipeType type) {
-        this.type = type;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -82,10 +89,10 @@ public class Menu_Recipe implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Menu_Recipe)) {
+        if (!(object instanceof User_Recipe)) {
             return false;
         }
-        Menu_Recipe other = (Menu_Recipe) object;
+        User_Recipe other = (User_Recipe) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -94,20 +101,7 @@ public class Menu_Recipe implements Serializable {
 
     @Override
     public String toString() {
-        return "mkma.entity.Menu_Recipe[ id=" + id + " ]";
+        return "mkma.entity.User_Recipe[ id=" + id + " ]";
     }
-    /**
-     * 
-     */
-
-
-
-}
-enum menu_recipeType {
-    Starter,
-    Main,
-    Secondary,
-    Dessert,
-    Side,
-    Drink;
+    
 }
