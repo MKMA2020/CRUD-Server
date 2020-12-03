@@ -3,6 +3,7 @@ package mkma.entity;
 import javax.persistence.Embeddable;
 
 /**
+ * Contains the IDs of the User - Recipe relation.
  * 
  * @author Kerman & Aitor
  */

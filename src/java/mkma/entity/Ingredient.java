@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Set;
 import static javax.persistence.CascadeType.MERGE;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import static javax.persistence.FetchType.EAGER;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,11 +14,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import mkma.enumeration.IngredientType;
 
 
 
 /**
- * The Ingredient class will contain the information of one Ingredient.
+ * Contains the information of one Ingredient.
+ * 
  * @author Martin Valiente Ainz
  */
 @Entity
@@ -25,22 +29,20 @@ public class Ingredient implements Serializable  {
     
     private static final long serialVersionUID = 1L;
     /**
-     * id Will contain the ID of the Ingredient.
+     * Contains the ID of the Ingredient.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     /**
-     * name Will contain the name of the Ingredient.
+     * Contains the name of the Ingredient.
      */
     @NotNull
     private String name;
 
-    /**
-     * type Will contain the type of the Ingredient.
-     */
     @NotNull
+    @Enumerated(EnumType.STRING)
     private IngredientType type;
     
     @ManyToMany (mappedBy = "ingredients", cascade=MERGE,fetch=EAGER)
@@ -97,26 +99,4 @@ public class Ingredient implements Serializable  {
     public String toString() {
         return "mkma.entity.Ingredient[ id=" + id + " ]";
     }
-}
-
-/**
- * This enum will have the different types of Ingredients.
- *
- * @author Martin Valiente Ainz
- */
-enum IngredientType {
-    Dairy,
-    FatAndOil,
-    Additive,
-    Mushroom,
-    Legume,
-    Vegetable,
-    Fruit,
-    Egg,
-    Cereal,
-    Fish,
-    Seafood,
-    Meat,
-    Drink,
-    Dessert;
 }

@@ -9,12 +9,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.Set;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import static javax.persistence.FetchType.EAGER;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import mkma.enumeration.UserType;
 
 /**
- * Class containing the information of a registered user.
+ * Contains the information of a registered user.
  *
  * @author Aitor Garcia
  */
@@ -83,11 +85,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch=EAGER)
     private Set<Ingredient> ingredients;
 
-    /**
-     * type will contain the different types of users
-     */
     @NotNull
-    private userType type;
+    @Enumerated(EnumType.STRING)
+    private UserType type;
 
     public long getId_user() {
         return id;
@@ -121,7 +121,7 @@ public class User implements Serializable {
         return lastsPasswordChange;
     }
 
-    public userType getType() {
+    public UserType getType() {
         return type;
     }
 
@@ -157,7 +157,7 @@ public class User implements Serializable {
         this.lastsPasswordChange = lastsPasswordChange;
     }
 
-    public void setType(userType type) {
+    public void setType(UserType type) {
         this.type = type;
     }
 
@@ -186,13 +186,4 @@ public class User implements Serializable {
         return "mkma.entity.User[ id=" + id + " ]";
     }
 
-}
-
-/**
- * userType enum that contains the different types of users
- */
-enum userType {
-    Normal,
-    Premium,
-    Admin
 }

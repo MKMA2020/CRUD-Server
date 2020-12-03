@@ -6,18 +6,20 @@
 package mkma.entity;
 
 import java.io.Serializable;
-import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import mkma.enumeration.Menu_recipeType;
 
 /**
- *
+ * Defines the relation between Menu and Recipe.
+ * 
  * @author 2dam
  */
 @Entity
@@ -28,6 +30,7 @@ public class Menu_Recipe implements Serializable {
     @EmbeddedId
     @GeneratedValue(strategy = GenerationType.AUTO)
     
+    @Enumerated(EnumType.STRING)
     private Menu_RecipeId id;
     
     @MapsId("menuId")
@@ -38,7 +41,8 @@ public class Menu_Recipe implements Serializable {
     @ManyToOne
     private Recipe recipes;
     
-    private menu_recipeType type;
+    @Enumerated(EnumType.STRING)
+    private Menu_recipeType type;
 
     public Menu_RecipeId getId() {
          return id;
@@ -64,11 +68,11 @@ public class Menu_Recipe implements Serializable {
         this.recipes = recipes;
     }
 
-    public menu_recipeType getType() {
+    public Menu_recipeType getType() {
         return type;
     }
 
-    public void setType(menu_recipeType type) {
+    public void setType(Menu_recipeType type) {
         this.type = type;
     }
 
@@ -96,18 +100,4 @@ public class Menu_Recipe implements Serializable {
     public String toString() {
         return "mkma.entity.Menu_Recipe[ id=" + id + " ]";
     }
-    /**
-     * 
-     */
-
-
-
-}
-enum menu_recipeType {
-    Starter,
-    Main,
-    Secondary,
-    Dessert,
-    Side,
-    Drink;
 }

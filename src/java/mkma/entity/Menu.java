@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Set;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,9 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import mkma.enumeration.MenuType;
 
 /**
- * The Menu class will contain the information of one Menu.
+ * Contains the information of one Menu.
+ * 
  * @author Kerman Rodriguez
  */
 @Entity
@@ -22,23 +26,21 @@ public class Menu implements Serializable{
     private static final long serialVersionUID = 1L;
     
     /**
-     * id Will contain the ID of the Ingredient.
+     * Contains the ID of the Ingredient.
      */
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
     private Long id;
     
     /**
-     * name Will contain the name of the Menu.
+     * Contains the name of the Menu.
      */
     @NotNull
     private String name;
     
-    /**
-     * type Will contain the type of the Menu.
-     */
     @NotNull
-    private menuType type;
+    @Enumerated(EnumType.STRING)
+    private MenuType type;
     
     @OneToMany (cascade = ALL , mappedBy = "menus")
     private Set<Menu_Recipe> menurecipes;
@@ -62,11 +64,11 @@ public class Menu implements Serializable{
         this.name = name;
     }
 
-    public menuType getType() {
+    public MenuType getType() {
         return type;
     }
 
-    public void setType(menuType type) {
+    public void setType(MenuType type) {
         this.type = type;
     }
     
@@ -95,16 +97,4 @@ public class Menu implements Serializable{
         return "mkma.entity.Menu[ id=" + id + " ]";
     }
 
-}
-
-/**
- * This enum will have the different types of Menus.
- *
- * @author Kerman Rodriguez
- */
-enum menuType {
-    Breakfast,
-    Lunch,
-    Snack,
-    Dinner
 }

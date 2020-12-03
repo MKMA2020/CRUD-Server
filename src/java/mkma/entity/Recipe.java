@@ -5,6 +5,8 @@ import java.util.Set;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.MERGE;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +17,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import mkma.enumeration.RecipeType;
 
 /**
- * Class will contain the information of a recipe.
+ * Contains the information of a recipe.
  *
  * @author Martin Gros
  */
@@ -57,6 +60,7 @@ public class Recipe implements Serializable {
      * type Will contain the type of the Recipe.
      */
     @NotNull
+    @Enumerated(EnumType.STRING)
     private RecipeType type;
     
     @ManyToMany (fetch = FetchType.EAGER, cascade=MERGE)
@@ -133,23 +137,7 @@ public class Recipe implements Serializable {
     @Override
     public String toString() {
         return "mkma.entity.Recipe[ id=" + id + " ]";
-    }
-    
-    
-    
-    
-}
-
-/**
- * This enum will have the different types of Recipes.
- *
- * @author Martin Gros
- */
-enum RecipeType {
-    Breakfast,
-    Snack,
-    Lunch,
-    Dinner;
+    }   
 }
 
 
