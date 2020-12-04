@@ -1,5 +1,6 @@
 package mkma.entity;
 
+import java.io.Serializable;
 import javax.persistence.Embeddable;
 
 /**
@@ -8,7 +9,7 @@ import javax.persistence.Embeddable;
  * @author Martin Gros
  */
 @Embeddable
-public class Menu_RecipeId {
+public class Menu_RecipeId implements Serializable {
 
     private Long menuId;
     private Long recipeId;

@@ -14,17 +14,19 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 import mkma.enumeration.IngredientType;
 
 
 
 /**
- * Information of one Ingredient.
+ * Information of an Ingredient.
  * 
  * @author Martin Valiente Ainz
  */
 @Entity
 @Table(name="ingredient", schema="mkma")
+@XmlRootElement
 public class Ingredient implements Serializable  {
     
     private static final long serialVersionUID = 1L;

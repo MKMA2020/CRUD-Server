@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 import mkma.enumeration.MenuType;
 
 /**
@@ -22,6 +23,7 @@ import mkma.enumeration.MenuType;
  */
 @Entity
 @Table (name="menu", schema="mkma")
+@XmlRootElement
 public class Menu implements Serializable{
     private static final long serialVersionUID = 1L;
     

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import mkma.enumeration.Menu_recipeType;
 
 /**
@@ -19,6 +20,7 @@ import mkma.enumeration.Menu_recipeType;
  */
 @Entity
 @Table (name = "menu_recipe", schema="mkma")
+@XmlRootElement
 public class Menu_Recipe implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -13,6 +13,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import static javax.persistence.FetchType.EAGER;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 import mkma.enumeration.UserType;
 
 /**
@@ -22,6 +23,7 @@ import mkma.enumeration.UserType;
  */
 @Entity
 @Table(name = "user", schema = "mkma")
+@XmlRootElement
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,5 +1,6 @@
 package mkma.entity;
 
+import java.io.Serializable;
 import javax.persistence.Embeddable;
 
 /**
@@ -8,7 +9,7 @@ import javax.persistence.Embeddable;
  * @author Kerman & Aitor
  */
 @Embeddable
-public class User_RecipeId {
+public class User_RecipeId implements Serializable {
 
     private Long userId;
     private Long recipeId;
