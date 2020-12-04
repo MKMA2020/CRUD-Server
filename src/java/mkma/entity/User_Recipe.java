@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mkma.entity;
 
 import java.io.Serializable;
@@ -24,19 +19,35 @@ import javax.persistence.Table;
 public class User_Recipe implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * Id of the relation between a user and a recipe.
+     */
     @EmbeddedId
     @GeneratedValue(strategy = GenerationType.AUTO)
     private User_RecipeId id;
     
+    /**
+     * Writer of the comment.
+     */
     @MapsId("userId")
     @ManyToOne
     private User users;
     
+    /**
+     * Recipe that has the comment.
+     */
     @MapsId("recipeId")
     @ManyToOne
     private Recipe recipes;
     
+    /**
+     * Text of the comment.
+     */
     private String comment;
+    /**
+     * Rating of the comment.
+     */
     private float rating;
 
     public User_RecipeId getId() {
@@ -79,6 +90,7 @@ public class User_Recipe implements Serializable {
         this.rating = rating;
     }
     
+    //TODO Check whether commentary is necessary.
     @Override
     public int hashCode() {
         int hash = 0;
@@ -86,6 +98,7 @@ public class User_Recipe implements Serializable {
         return hash;
     }
 
+    //TODO Check whether commentary is necessary.
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -99,6 +112,7 @@ public class User_Recipe implements Serializable {
         return true;
     }
 
+    //TODO Check whether commentary is necessary.
     @Override
     public String toString() {
         return "mkma.entity.User_Recipe[ id=" + id + " ]";

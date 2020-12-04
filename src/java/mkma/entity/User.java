@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import mkma.enumeration.UserType;
 
 /**
- * Contains the information of a registered user.
+ * Information of a registered user.
  *
  * @author Aitor Garcia
  */
@@ -27,67 +27,79 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * id Will contain the ID of the User.
+     * ID of the User.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     /**
-     * login Will contain the login String of the User.
+     * Login String of the User.
      */
     @NotNull
     private String login;
 
     /**
-     * email Will contain the E-mail of the User.
+     * E-mail of the User.
      */
     @NotNull
     private String email;
 
     /**
-     * fullName Will contain the Full Name of the User.
+     * Full Name of the User.
      */
     @NotNull
     private String fullName;
 
     /**
-     * status Will contain the status (Active or Inactive) of the User.
+     * Status (Active or Inactive) of the User.
      */
     @NotNull
     private Boolean status;
 
     /**
-     * password Will contain the password of the User.
+     * Password of the User.
      */
     @NotNull
     private String password;
 
     /**
-     * lastAccess Will contain the Last Access Timestamp of the User.
+     * Last Access Timestamp of the User.
      */
     @NotNull
     private Timestamp lastAccess;
 
     /**
-     * lastsPasswordChange Will contain the Last Password Change Timestamp of
+     * Last Password Change Timestamp of
      * the User.
      */
     @NotNull
     private Timestamp lastsPasswordChange;
     
-    @OneToMany(mappedBy = "user", fetch=EAGER)
-    private Set<Recipe> recipes;
-    
-    @OneToMany(mappedBy = "user", fetch=EAGER)
-    private Set<Menu> menus;
-    
-    @OneToMany(mappedBy = "user", fetch=EAGER)
-    private Set<Ingredient> ingredients;
-
+    /**
+     * Type of the user.
+     */
     @NotNull
     @Enumerated(EnumType.STRING)
     private UserType type;
+    
+    /**
+     * Recipe collection of the user.
+     */
+    @OneToMany(mappedBy = "user", fetch=EAGER)
+    private Set<Recipe> recipes;
+    
+    /**
+     * Menu collection of the user.
+     */
+    @OneToMany(mappedBy = "user", fetch=EAGER)
+    private Set<Menu> menus;
+    
+    /**
+     * Ingredient collection of the user.
+     */
+    @OneToMany(mappedBy = "user", fetch=EAGER)
+    private Set<Ingredient> ingredients;
 
     public long getId_user() {
         return id;

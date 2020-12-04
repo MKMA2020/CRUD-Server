@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 import mkma.enumeration.MenuType;
 
 /**
- * Contains the information of one Menu.
+ * Information of a Menu.
  * 
  * @author Kerman Rodriguez
  */
@@ -26,25 +26,34 @@ public class Menu implements Serializable{
     private static final long serialVersionUID = 1L;
     
     /**
-     * Contains the ID of the Ingredient.
+     * ID of the Ingredient.
      */
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
     private Long id;
     
     /**
-     * Contains the name of the Menu.
+     * Name of the Menu.
      */
     @NotNull
     private String name;
     
+    /**
+     * Type of the menu.
+     */
     @NotNull
     @Enumerated(EnumType.STRING)
     private MenuType type;
     
+    /**
+     * Menu-recipe relation collection of the menu.
+     */
     @OneToMany (cascade = ALL , mappedBy = "menus")
     private Set<Menu_Recipe> menurecipes;
     
+    /**
+     * Creator of the menu.
+     */
     @ManyToOne
     private User user;
    
@@ -72,6 +81,7 @@ public class Menu implements Serializable{
         this.type = type;
     }
     
+    //TODO Check whether commentary is necessary.
       @Override
     public int hashCode() {
         int hash = 0;
@@ -79,6 +89,7 @@ public class Menu implements Serializable{
         return hash;
     }
 
+    //TODO Check whether commentary is necessary.
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -92,6 +103,7 @@ public class Menu implements Serializable{
         return true;
     }
 
+    //TODO Check whether commentary is necessary.
     @Override
     public String toString() {
         return "mkma.entity.Menu[ id=" + id + " ]";

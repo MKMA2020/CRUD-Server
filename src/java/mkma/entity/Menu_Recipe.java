@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mkma.entity;
 
 import java.io.Serializable;
@@ -18,9 +13,9 @@ import javax.persistence.Table;
 import mkma.enumeration.Menu_recipeType;
 
 /**
- * Defines the relation between Menu and Recipe.
+ * Relation between Menu and Recipe.
  * 
- * @author 2dam
+ * @author Martin Gros
  */
 @Entity
 @Table (name = "menu_recipe", schema="mkma")
@@ -30,17 +25,29 @@ public class Menu_Recipe implements Serializable {
     @EmbeddedId
     @GeneratedValue(strategy = GenerationType.AUTO)
     
+    /**
+     * Id of the relation between a menu and a recipe.
+     */
     @Enumerated(EnumType.STRING)
     private Menu_RecipeId id;
     
+    /**
+     * Menu that contains the recipe.
+     */
     @MapsId("menuId")
     @ManyToOne
     private Menu menus;
     
+    /**
+     * Recipe Contained in the menu.
+     */
     @MapsId("recipeId")
     @ManyToOne
     private Recipe recipes;
     
+    /**
+     * Type of the recipe.
+     */
     @Enumerated(EnumType.STRING)
     private Menu_recipeType type;
 
@@ -76,6 +83,7 @@ public class Menu_Recipe implements Serializable {
         this.type = type;
     }
 
+    //TODO Check whether commentary is necessary.
     @Override
     public int hashCode() {
         int hash = 0;
@@ -83,6 +91,7 @@ public class Menu_Recipe implements Serializable {
         return hash;
     }
 
+    //TODO Check whether commentary is necessary.
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -96,6 +105,7 @@ public class Menu_Recipe implements Serializable {
         return true;
     }
 
+    //TODO Check whether commentary is necessary.
     @Override
     public String toString() {
         return "mkma.entity.Menu_Recipe[ id=" + id + " ]";

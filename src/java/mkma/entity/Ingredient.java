@@ -19,7 +19,7 @@ import mkma.enumeration.IngredientType;
 
 
 /**
- * Contains the information of one Ingredient.
+ * Information of one Ingredient.
  * 
  * @author Martin Valiente Ainz
  */
@@ -29,25 +29,34 @@ public class Ingredient implements Serializable  {
     
     private static final long serialVersionUID = 1L;
     /**
-     * Contains the ID of the Ingredient.
+     * ID of the Ingredient.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     /**
-     * Contains the name of the Ingredient.
+     * Name of the Ingredient.
      */
     @NotNull
     private String name;
 
+    /**
+     * Type of the ingredient
+     */
     @NotNull
     @Enumerated(EnumType.STRING)
     private IngredientType type;
     
+    /**
+     * Collection of recipes that use the ingredient.
+     */
     @ManyToMany (mappedBy = "ingredients", cascade=MERGE,fetch=EAGER)
     private Set<Recipe> recipes;
     
+    /**
+     * Creator of the ingredient.
+     */
     @ManyToOne
     private User user;
     
@@ -75,6 +84,7 @@ public class Ingredient implements Serializable  {
         this.type = type;
     }
     
+    //TODO Check whether commentary is necessary.
     @Override
     public int hashCode() {
         int hash = 0;
@@ -82,6 +92,7 @@ public class Ingredient implements Serializable  {
         return hash;
     }
 
+    //TODO Check whether commentary is necessary.
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -95,6 +106,7 @@ public class Ingredient implements Serializable  {
         return true;
     }
 
+    //TODO Check whether commentary is necessary.
     @Override
     public String toString() {
         return "mkma.entity.Ingredient[ id=" + id + " ]";

@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 import mkma.enumeration.RecipeType;
 
 /**
- * Contains the information of a recipe.
+ * Information of a recipe.
  *
  * @author Martin Gros
  */
@@ -31,45 +31,54 @@ public class Recipe implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * id Will contain the ID of the Recipe.
+     * ID of the Recipe.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     /**
-     * Name Will contain the Name of the Recipe.
+     * Name of the Recipe.
      */
 
     @NotNull
     private String Name;
 
     /**
-     * steps Will contain the steps of the Recipe.
+     * Steps of the Recipe.
      */
     @NotNull
     private String steps;
 
     /**
-     * kCal Will contain the kCal value of the Recipe.
+     * kCal value of the Recipe.
      */
     @NotNull
     private float kCal;
 
     /**
-     * type Will contain the type of the Recipe.
+     * Type of the Recipe.
      */
     @NotNull
     @Enumerated(EnumType.STRING)
     private RecipeType type;
     
+    /**
+     * Ingredient collection of the recipe.
+     */
     @ManyToMany (fetch = FetchType.EAGER, cascade=MERGE)
     @JoinTable (name = "Recipe_Ingredient", schema = "mkma")
     private Set <Ingredient> ingredients;
     
+    /**
+     * Menu-recipes relation collection of the recipe.
+     */
     @OneToMany (cascade = ALL , mappedBy = "recipes")
     private Set<Menu_Recipe> menurecipes;
     
+    /**
+     * Creator of the recipe.
+     */
     @ManyToOne
     private User user;
      
