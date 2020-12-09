@@ -1,6 +1,8 @@
 package mkma.service;
 
+import java.util.List;
 import javax.persistence.EntityManager;
+import mkma.entity.User;
 
 /**
  * 
@@ -31,5 +33,35 @@ public abstract class AbstractFacade<T> {
 
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
+    }
+    
+    public List<User> findAllUsers(){
+        List<User> users;
+        users = getEntityManager().createNamedQuery("findAllUsers").getResultList();
+        return users;
+    }
+    
+    public List<User> findPremUsers(){
+        List<User> premUsers;
+        premUsers = getEntityManager().createNamedQuery("getPremUsers").getResultList();
+        return premUsers;
+    }
+    
+    public List<User> findNormalUsers(){
+        List<User> normalUsers;
+        normalUsers = getEntityManager().createNamedQuery("getPremUsers").getResultList();
+        return normalUsers;
+    }
+            
+    public List<User> findUserById(){
+        List<User> users;
+        users = getEntityManager().createNamedQuery("findUserById").getResultList();
+        return users;
+    }
+            
+    public List<User> findUserByFN(){
+        List<User> users;
+        users = getEntityManager().createNamedQuery("findUserByFN").getResultList();
+        return users;
     }
 }

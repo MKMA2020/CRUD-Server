@@ -1,5 +1,6 @@
 package mkma.service;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -60,4 +61,43 @@ public class UserFacadeREST extends AbstractFacade<User> {
         return em;
     }
     
+    @GET
+    @Path("all")
+    @Produces(MediaType.APPLICATION_XML)
+    @Override
+    public List<User> findAllUsers(){
+        return super.findAllUsers();
+    }
+    
+    @GET
+    @Path("prem")
+    @Produces(MediaType.APPLICATION_XML)
+    @Override
+    public List<User> findPremUsers(){
+        return super.findPremUsers();
+    }
+    
+    @GET
+    @Path("normal")
+    @Produces(MediaType.APPLICATION_XML)
+    @Override
+    public List<User> findNormalUsers(){
+        return super.findNormalUsers();
+    }
+    
+    @GET
+    @Path("id")
+    @Produces(MediaType.APPLICATION_XML)
+    @Override
+    public List<User> findUserById(){
+        return super.findUserById();
+    }
+    
+    @GET
+    @Path("name")
+    @Produces(MediaType.APPLICATION_XML)
+    @Override
+    public List<User> findUserByFN(){
+        return super.findUserByFN();
+    }
 }
