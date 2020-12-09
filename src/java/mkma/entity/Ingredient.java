@@ -12,23 +12,37 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import mkma.enumeration.IngredientType;
 
-
-
 /**
  * Information of an Ingredient.
- * 
+ *
  * @author Martin Valiente Ainz
  */
 @Entity
-@Table(name="ingredient", schema="mkma")
-@XmlRootElement
-public class Ingredient implements Serializable  {
+@Table(name = "ingredient", schema = "mkma")
+@NamedQueries({
+    @NamedQuery(name = "findAllIngredientsASC",
+            query = "SELECT i FROM Ingredient i ORDER BY i.name ASC"
+    ),
     
+    @NamedQuery(name = "findAllIngredientsDESC",
+            query = "SELECT i FROM Ingredient i ORDER BY i.name DESC"
+    ),
+
+    @NamedQuery(name = "getIngredientsByType",
+            query = "SELECT i FROM Ingredient i WHERE i.type=:type"
+    ),
+})
+
+@XmlRootElement
+public class Ingredient implements Serializable {
+
     private static final long serialVersionUID = 1L;
     /**
      * ID of the Ingredient.
@@ -49,19 +63,19 @@ public class Ingredient implements Serializable  {
     @NotNull
     @Enumerated(EnumType.STRING)
     private IngredientType type;
-    
+
     /**
      * Collection of recipes that use the ingredient.
      */
-    @ManyToMany (mappedBy = "ingredients", cascade=MERGE,fetch=EAGER)
+    @ManyToMany(mappedBy = "ingredients", cascade = MERGE, fetch = EAGER)
     private Set<Recipe> recipes;
-    
+
     /**
      * Creator of the ingredient.
      */
     @ManyToOne
     private User user;
-    
+
     public long getId() {
         return id;
     }
@@ -85,7 +99,7 @@ public class Ingredient implements Serializable  {
     public void setType(IngredientType type) {
         this.type = type;
     }
-    
+
     //TODO Check whether commentary is necessary.
     @Override
     public int hashCode() {
