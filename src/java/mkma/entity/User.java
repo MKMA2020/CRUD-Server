@@ -34,10 +34,7 @@ import mkma.enumeration.UserType;
             query ="SELECT u FROM User u WHERE u.type='Premium'"
     ),
     @NamedQuery (name="getNormalUsers",
-            query ="SELECT u FROM User u WHERE u.status=:status"
-    ),
-    @NamedQuery (name="findUserById",
-            query ="SELECT u FROM User u WHERE u.id=:id"
+            query ="SELECT u FROM User u WHERE u.type='Normal'"
     ),
     @NamedQuery (name="findUserByFN",
             query ="SELECT u FROM User u WHERE u.fullName=:fullName"
