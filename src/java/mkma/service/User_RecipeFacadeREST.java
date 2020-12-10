@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package mkma.service;
 
 import javax.ejb.Stateless;
@@ -18,7 +23,7 @@ import mkma.entity.User_RecipeId;
 
 /**
  *
- * @author Aitor
+ * @author 2dam
  */
 @Stateless
 @Path("mkma.entity.user_recipe")
@@ -45,14 +50,15 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(User_Recipe entity) {
         super.create(entity);
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_XML})
-    public void edit(User_Recipe entity) {
+    @Path("{id}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void edit(@PathParam("id") PathSegment id, User_Recipe entity) {
         super.edit(entity);
     }
 
@@ -65,7 +71,7 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public User_Recipe find(@PathParam("id") PathSegment id) {
         mkma.entity.User_RecipeId key = getPrimaryKey(id);
         return super.find(key);

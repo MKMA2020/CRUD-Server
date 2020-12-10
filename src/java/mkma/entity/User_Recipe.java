@@ -51,6 +51,11 @@ public class User_Recipe implements Serializable {
      * Rating of the comment.
      */
     private float rating;
+    
+    /**
+     * Defines if the comment is verified.
+     */
+    private boolean verified;
 
     public User_RecipeId getId() {
         return id;
