@@ -19,6 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import mkma.entity.User;
+import mkma.enumeration.UserType;
 
 /**
  *
@@ -61,10 +62,53 @@ public class UserFacadeREST extends AbstractFacade<User> {
     public User find(@PathParam("id") Long id) {
         return super.find(id);
     }
-
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
     
+    /**
+     * find all users and orders them by their name on asc
+     * @return 
+     */
+    @GET
+    @Produces({MediaType.APPLICATION_XML})
+    public List<User> findAllUsers() {
+        return super.findAllUsers();
+    }
+    
+    /**
+     * Find users by their type. The method receives the type.
+     * @param type
+     * @return 
+     */
+    @GET
+    @Path("type/premium")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<User> findPremUsers() {
+        return super.findPremUsers();
+    }
+    
+    /**
+     * Find users by their type. The method receives the type.
+     * @param type
+     * @return 
+     */
+    @GET
+    @Path("type/normal")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<User> findNormalUsers() {
+        return super.findNormalUsers();
+    }
+    
+    /**
+     * Finds all users and orders them by their full name.
+     * @return 
+     */
+    @GET
+    @Path("fullName/{fullName}")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<User> findUserByFN(@PathParam("fullName") String fullName) {
+        return super.findUserByFN(fullName);
+    }
 }

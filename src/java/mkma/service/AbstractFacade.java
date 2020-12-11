@@ -3,6 +3,7 @@ package mkma.service;
 import java.util.List;
 import javax.persistence.EntityManager;
 import mkma.entity.User;
+import mkma.enumeration.UserType;
 
 /**
  * 
