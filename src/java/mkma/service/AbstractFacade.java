@@ -7,7 +7,7 @@ import mkma.enumeration.MenuType;
 
 /**
  *
- * @author Aitor
+ * @author Kerman Rodríguez
  */
 public abstract class AbstractFacade<T> {
 
