@@ -1,9 +1,12 @@
 package mkma.service;
 
+import java.util.List;
 import javax.persistence.EntityManager;
+import mkma.entity.Menu;
+import mkma.enumeration.MenuType;
 
 /**
- * 
+ *
  * @author Aitor
  */
 public abstract class AbstractFacade<T> {
@@ -31,5 +34,27 @@ public abstract class AbstractFacade<T> {
 
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
+    }
+    /**
+     * Finds every menu
+     * @return a list of the menus
+     */
+    public List<Menu> findAllMenus() {
+        List<Menu> menus;
+        menus = getEntityManager().createNamedQuery("findAllMenus").getResultList();
+
+        return menus;
+    }
+    
+    /**
+     * Finds every menu with a certain type
+     * @param type the type to search
+     * @return a list of the menus by type
+     */
+    public List<Menu> findMenusByType(MenuType type) {
+        List<Menu> menus;
+        menus = getEntityManager().createNamedQuery("findMenusByType").setParameter("type", type).getResultList();
+
+        return menus;
     }
 }
