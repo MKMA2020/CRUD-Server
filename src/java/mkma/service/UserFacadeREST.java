@@ -68,8 +68,8 @@ public class UserFacadeREST extends AbstractFacade<User> {
     }
     
     /**
-     * find all users and orders them by their name on asc
-     * @return 
+     * Returns a list with all the users.
+     * @return List with all the users.
      */
     @GET
     @Produces({MediaType.APPLICATION_XML})
@@ -78,37 +78,26 @@ public class UserFacadeREST extends AbstractFacade<User> {
     }
     
     /**
-     * Find users by their type. The method receives the type.
-     * @param type
-     * @return 
+     * Returns a list with users of a type.
+     * @param type Type of the users.
+     * @return List with the searched users.
      */
     @GET
-    @Path("type/premium")
+    @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<User> findPremUsers() {
-        return super.findPremUsers();
+    public List<User> findUsersByType(@PathParam("type") UserType type) {
+        return super.findUsersByType(type);
     }
     
-    /**
-     * Find users by their type. The method receives the type.
-     * @param type
-     * @return 
-     */
-    @GET
-    @Path("type/normal")
-    @Produces({MediaType.APPLICATION_XML})
-    public List<User> findNormalUsers() {
-        return super.findNormalUsers();
-    }
     
     /**
-     * Finds all users and orders them by their full name.
-     * @return 
+     * Returns a list of users with a specific name.
+     * @return List with the searched users.
      */
     @GET
     @Path("fullName/{fullName}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<User> findUserByFN(@PathParam("fullName") String fullName) {
-        return super.findUserByFN(fullName);
+    public List<User> findUsersByFN(@PathParam("fullName") String fullName) {
+        return super.findUsersByFN(fullName);
     }
 }

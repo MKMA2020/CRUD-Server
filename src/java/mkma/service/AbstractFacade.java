@@ -48,22 +48,13 @@ public abstract class AbstractFacade<T> {
     
     /**
      * Returns a list of all premium users.
+     * @param type
      * @return premUsers: contains all premium users.
      */
-    public List<User> findPremUsers(){
+    public List<User> findUsersByType(UserType type){
         List<User> premUsers;
-        premUsers = getEntityManager().createNamedQuery("getPremUsers").getResultList();
+        premUsers = getEntityManager().createNamedQuery("getUsersByType").setParameter("type", type).getResultList();
         return premUsers;
-    }
-    
-    /**
-     * Returns a list of all normal users.
-     * @return normalUsers: contains all non premium users.
-     */
-    public List<User> findNormalUsers(){
-        List<User> normalUsers;
-        normalUsers = getEntityManager().createNamedQuery("getPremUsers").getResultList();
-        return normalUsers;
     }
 
     /**
@@ -71,7 +62,7 @@ public abstract class AbstractFacade<T> {
      * @param fullName Name to search.
      * @return users: contains all user with the specified full name.
      */
-    public List<User> findUserByFN(String fullName){
+    public List<User> findUsersByFN(String fullName){
         List<User> users;
         users = getEntityManager().createNamedQuery("findUserByFN").setParameter("fullName", fullName).getResultList();
         return users;
