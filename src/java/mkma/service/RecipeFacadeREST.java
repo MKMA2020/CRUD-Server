@@ -92,7 +92,7 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
      * @return 
      */
     @GET
-    @Path("kcal/{kCal}")
+    @Path("kcal")
     @Produces({MediaType.APPLICATION_XML})
     public List<Recipe> OrderBykCal() {
         return super.OrderBykCal();
