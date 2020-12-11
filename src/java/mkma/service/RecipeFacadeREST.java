@@ -84,7 +84,7 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
     @GET
     @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<Recipe> getRecipesByType(RecipeType type) {
+    public List<Recipe> getRecipesByType( @PathParam("type") RecipeType type) {
         return super.getRecipesByType(type);
     }
     /**
