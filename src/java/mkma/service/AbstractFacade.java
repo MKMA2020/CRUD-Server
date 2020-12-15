@@ -2,15 +2,12 @@ package mkma.service;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import mkma.entity.Recipe;
-import mkma.enumeration.RecipeType;
-import mkma.entity.Ingredient;
-import mkma.enumeration.IngredientType;
-
+import mkma.entity.Menu;
+import mkma.enumeration.MenuType;
 
 /**
- * The AbstractFacade invokes the entity manager to create the queries.
- * @author Martin Valiente Ainz
+ *
+ * @author Kerman Rodríguez
  */
 public abstract class AbstractFacade<T> {
 
@@ -35,6 +32,32 @@ public abstract class AbstractFacade<T> {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
 
+    public T find(Object id) {
+        return getEntityManager().find(entityClass, id);
+    }
+    /**
+     * Finds every menu
+     * @return a list of the menus
+     */
+    public List<Menu> findAllMenus() {
+        List<Menu> menus;
+        menus = getEntityManager().createNamedQuery("findAllMenus").getResultList();
+
+        return menus;
+    }
+    
+    /**
+     * Finds every menu with a certain type
+     * @param type the type to search
+     * @return a list of the menus by type
+     */
+    public List<Menu> findMenusByType(MenuType type) {
+        List<Menu> menus;
+        menus = getEntityManager().createNamedQuery("findMenusByType").setParameter("type", type).getResultList();
+
+        return menus;
+    }
+
     public List<Ingredient> findAllIngredientsASC() {
 
         List<Ingredient> ingredients;
@@ -56,9 +79,6 @@ public abstract class AbstractFacade<T> {
         return ingredients;
     }
 
-    public T find(Object id) {
-        return getEntityManager().find(entityClass, id);
-    }
     /**
      * finds all recipes and orders them by their name
      * @return a list of recipes
@@ -89,4 +109,5 @@ public abstract class AbstractFacade<T> {
         return recipes;
     }
 }
+
 
