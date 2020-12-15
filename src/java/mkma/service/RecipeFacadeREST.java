@@ -1,5 +1,6 @@
 package mkma.service;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import mkma.entity.Recipe;
+import mkma.enumeration.RecipeType;
 
 /**
  *
@@ -47,6 +49,11 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
     public void remove(@PathParam("id") Long id) {
         super.remove(super.find(id));
     }
+    /**
+     * Find a recipe by an id
+     * @param id
+     * @return 
+     */
 
     @GET
     @Path("{id}")
@@ -59,5 +66,36 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+    /**
+     * find all recipes and orders them by theirn name on asc
+     * @return 
+     */
+
+    @GET
+    @Produces({MediaType.APPLICATION_XML})
+    public List<Recipe> findAllRecipes() {
+        return super.findAllRecipes();
+    }
+    /**
+     * Find recipes by their type. The method receives the type
+     * @param type
+     * @return 
+     */
+    @GET
+    @Path("type/{type}")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<Recipe> getRecipesByType( @PathParam("type") RecipeType type) {
+        return super.getRecipesByType(type);
+    }
+    /**
+     * Finds all recipes and orders them by their calorie count
+     * @return 
+     */
+    @GET
+    @Path("kcal")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<Recipe> OrderBykCal() {
+        return super.OrderBykCal();
+    }
+   
 }
