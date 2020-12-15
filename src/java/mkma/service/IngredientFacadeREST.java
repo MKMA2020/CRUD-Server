@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mkma.service;
 
 import java.util.List;
@@ -19,13 +14,16 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import mkma.entity.Ingredient;
+import mkma.enumeration.IngredientType;
 
 /**
+ * RESTful web service class that has CRUD operations for {@link Ingredient}
+ * entities.
  *
- * @author 2dam
+ * @author Martin Valiente Ainz
  */
 @Stateless
-@Path("mkma.entity.ingredient")
+@Path("ingredient")
 public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
 
     @PersistenceContext(unitName = "mkmaPU")
@@ -35,6 +33,11 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
         super(Ingredient.class);
     }
 
+    /**
+     * RESTful method to create a {@link Ingredient} object.
+     *
+     * @param ingredient The {@link Ingredient} object.
+     */
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -42,6 +45,11 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
         super.create(entity);
     }
 
+    /**
+     * RESTful method to update a {@link Ingredient} object.
+     *
+     * @param ingredient The {@link Ingredient} object.
+     */
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -49,22 +57,67 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
         super.edit(entity);
     }
 
+    /**
+     * RESTful method to delete a {@link Ingredient} object.
+     *
+     * @param ingredient The {@link Ingredient} object.
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
         super.remove(super.find(id));
     }
 
+    /**
+     * RESTful method to get a {@link Ingredient} object by id.
+     *
+     * @return The {@link Ingredient} object.
+     */
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
     public Ingredient find(@PathParam("id") Long id) {
         return super.find(id);
+    }
+
+    /**
+     * RESTful method to get all {@link Ingredient} objects ordered ascending.
+     *
+     * @return The {@link Ingredient} List.
+     */
+    @GET
+    @Produces({MediaType.APPLICATION_XML})
+    public List<Ingredient> findByASC() {
+        return super.findAllIngredientsASC();
+    }
+
+    /**
+     * RESTful method to get all {@link Ingredient} objects ordered descending.
+     *
+     * @return The {@link Ingredient} List.
+     */
+    @GET
+    @Path("desc")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<Ingredient> findByDESC() {
+        return super.findAllIngredientsDESC();
+    }
+
+    /**
+     * RESTful method to get all {@link Ingredient} objects by type.
+     *
+     * @param type The {@link IngredientType}.
+     * @return The {@link Ingredient} List.
+     */
+    @GET
+    @Path("type/{type}")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<Ingredient> findByType(@PathParam("type") IngredientType type) {
+        return super.findAllIngredientsByType(type);
     }
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
 }

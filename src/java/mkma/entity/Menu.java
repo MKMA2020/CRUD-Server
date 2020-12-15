@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -18,47 +20,54 @@ import mkma.enumeration.MenuType;
 
 /**
  * Information of a Menu.
- * 
+ *
  * @author Kerman Rodriguez
  */
 @Entity
-@Table (name="menu", schema="mkma")
+@NamedQueries({
+    @NamedQuery(
+            name = "findAllMenus", query = "SELECT m FROM Menu m ORDER BY m.name ASC"),
+    @NamedQuery(
+            name = "findMenusByType", query = "SELECT m FROM Menu m WHERE m.type=:type")
+})
+@Table(name = "menu", schema = "mkma")
 @XmlRootElement
-public class Menu implements Serializable{
+public class Menu implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * ID of the Ingredient.
      */
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     /**
      * Name of the Menu.
      */
     @NotNull
     private String name;
-    
+
     /**
      * Type of the menu.
      */
     @NotNull
     @Enumerated(EnumType.STRING)
     private MenuType type;
-    
+
     /**
      * Menu-recipe relation collection of the menu.
      */
-    @OneToMany (cascade = ALL , mappedBy = "menus")
+    @OneToMany(cascade = ALL, mappedBy = "menus")
     private Set<Menu_Recipe> menurecipes;
-    
+
     /**
      * Creator of the menu.
      */
     @ManyToOne
     private User user;
-   
+
     public Long getId() {
         return id;
     }
@@ -82,9 +91,9 @@ public class Menu implements Serializable{
     public void setType(MenuType type) {
         this.type = type;
     }
-    
+
     //TODO Check whether commentary is necessary.
-      @Override
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
