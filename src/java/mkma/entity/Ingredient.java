@@ -75,7 +75,12 @@ public class Ingredient implements Serializable {
      */
     @ManyToOne
     private User user;
-
+  
+    /**
+     * Defines if the ingredient is verified.
+     */
+    private boolean verified;
+    
     public long getId() {
         return id;
     }

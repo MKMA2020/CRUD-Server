@@ -12,6 +12,8 @@ import java.util.Set;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import static javax.persistence.FetchType.EAGER;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 import mkma.enumeration.UserType;
@@ -24,6 +26,17 @@ import mkma.enumeration.UserType;
 @Entity
 @Table(name = "user", schema = "mkma")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery (name="findAllUsers",
+            query ="SELECT u FROM User u ORDER BY u.fullName ASC"
+    ),
+    @NamedQuery (name="getUsersByType",
+            query ="SELECT u FROM User u WHERE u.type=:type"
+    ),
+    @NamedQuery (name="findUserByFN",
+            query ="SELECT u FROM User u WHERE u.fullName=:fullName"
+    )
+})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;

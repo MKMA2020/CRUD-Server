@@ -103,6 +103,11 @@ public class Recipe implements Serializable {
      */
     @ManyToOne
     private User user;
+    
+    /**
+     * Defines if the recipe is verified.
+     */
+    private boolean verified;
 
     public Long getId() {
         return id;

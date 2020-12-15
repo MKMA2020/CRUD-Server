@@ -40,7 +40,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      */
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Ingredient entity) {
         super.create(entity);
     }
@@ -51,8 +51,9 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      * @param ingredient The {@link Ingredient} object.
      */
     @PUT
-    @Consumes({MediaType.APPLICATION_XML})
-    public void edit(Ingredient entity) {
+    @Path("{id}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void edit(@PathParam("id") Long id, Ingredient entity) {
         super.edit(entity);
     }
 
@@ -73,7 +74,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      * @return The {@link Ingredient} object.
      */
     @GET
-    @Path("id/{id}")
+    @Path("{id}")
     @Produces({MediaType.APPLICATION_XML})
     public Ingredient find(@PathParam("id") Long id) {
         return super.find(id);

@@ -1,5 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package mkma.service;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,7 +24,7 @@ import mkma.entity.Menu_RecipeId;
 
 /**
  *
- * @author Aitor
+ * @author 2dam
  */
 @Stateless
 @Path("mkma.entity.menu_recipe")
@@ -45,14 +51,15 @@ public class Menu_RecipeFacadeREST extends AbstractFacade<Menu_Recipe> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Menu_Recipe entity) {
         super.create(entity);
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_XML})
-    public void edit(Menu_Recipe entity) {
+    @Path("{id}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void edit(@PathParam("id") PathSegment id, Menu_Recipe entity) {
         super.edit(entity);
     }
 
@@ -65,7 +72,7 @@ public class Menu_RecipeFacadeREST extends AbstractFacade<Menu_Recipe> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Menu_Recipe find(@PathParam("id") PathSegment id) {
         mkma.entity.Menu_RecipeId key = getPrimaryKey(id);
         return super.find(key);

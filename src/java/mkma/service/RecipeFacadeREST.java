@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package mkma.service;
 
 import java.util.List;
@@ -18,7 +23,7 @@ import mkma.enumeration.RecipeType;
 
 /**
  *
- * @author Aitor
+ * @author 2dam
  */
 @Stateless
 @Path("mkma.entity.recipe")
@@ -33,14 +38,15 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Recipe entity) {
         super.create(entity);
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_XML})
-    public void edit(Recipe entity) {
+    @Path("{id}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void edit(@PathParam("id") Long id, Recipe entity) {
         super.edit(entity);
     }
 
@@ -57,7 +63,7 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Recipe find(@PathParam("id") Long id) {
         return super.find(id);
     }

@@ -108,6 +108,36 @@ public abstract class AbstractFacade<T> {
         recipes = getEntityManager().createNamedQuery("OrderBykCal").getResultList();
         return recipes;
     }
-}
+      /**
+     * Returns a list of all the users.
+     * @return users: contains all users.
+     */
+    public List<User> findAllUsers(){
+        List<User> users;
+        users = getEntityManager().createNamedQuery("findAllUsers").getResultList();
+        return users;
+    }
+    
+    /**
+     * Returns a list of all premium users.
+     * @param type
+     * @return premUsers: contains all premium users.
+     */
+    public List<User> findUsersByType(UserType type){
+        List<User> premUsers;
+        premUsers = getEntityManager().createNamedQuery("getUsersByType").setParameter("type", type).getResultList();
+        return premUsers;
+    }
 
+    /**
+     * Returns a list of users with the same full name.
+     * @param fullName Name to search.
+     * @return users: contains all user with the specified full name.
+     */
+    public List<User> findUsersByFN(String fullName){
+        List<User> users;
+        users = getEntityManager().createNamedQuery("findUserByFN").setParameter("fullName", fullName).getResultList();
+        return users;
+    }
+}
 

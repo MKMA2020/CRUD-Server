@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package mkma.service;
 
 import java.util.List;
@@ -36,7 +41,7 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
      */
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Menu entity) {
         super.create(entity);
     }
@@ -66,7 +71,7 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
      */
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Menu find(@PathParam("id") Long id) {
         return super.find(id);
     }

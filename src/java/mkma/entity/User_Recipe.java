@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -16,6 +18,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Aitor & Kerman
  */
 @Entity
+@NamedQueries({
+    @NamedQuery (name="findCommentsByRecipes",
+            query ="SELECT ur FROM User_Recipe ur WHERE ur.recipes.id=:id"
+    ),
+        @NamedQuery (name="findRecipesByUser",
+            query ="SELECT r FROM Recipe r WHERE r.id=(SELECT ur.recipes.id FROM User_Recipe ur WHERE ur.users.id=:id)"
+    )
+})
 @Table (name = "user_recipe", schema="mkma")
 @XmlRootElement
 public class User_Recipe implements Serializable {
@@ -51,6 +61,11 @@ public class User_Recipe implements Serializable {
      * Rating of the comment.
      */
     private float rating;
+    
+    /**
+     * Defines if the comment is verified.
+     */
+    private boolean verified;
 
     public User_RecipeId getId() {
         return id;
