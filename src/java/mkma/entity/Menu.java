@@ -72,7 +72,7 @@ public class Menu implements Serializable {
         return id;
     }
 
-    public void setId_menu(Long id_Ingredient) {
+    public void setId_menu(Long id) {
         this.id = id;
     }
 

@@ -27,17 +27,12 @@ import mkma.enumeration.IngredientType;
 @Entity
 @Table(name = "ingredient", schema = "mkma")
 @NamedQueries({
-    @NamedQuery(name = "findAllIngredientsASC",
+    @NamedQuery(name = "findAllIngredients",
             query = "SELECT i FROM Ingredient i ORDER BY i.name ASC"
     ),
-    
-    @NamedQuery(name = "findAllIngredientsDESC",
-            query = "SELECT i FROM Ingredient i ORDER BY i.name DESC"
-    ),
-
     @NamedQuery(name = "getIngredientsByType",
             query = "SELECT i FROM Ingredient i WHERE i.type=:type"
-    ),
+    )
 })
 
 @XmlRootElement

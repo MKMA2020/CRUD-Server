@@ -87,20 +87,8 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      */
     @GET
     @Produces({MediaType.APPLICATION_XML})
-    public List<Ingredient> findByASC() {
-        return super.findAllIngredientsASC();
-    }
-
-    /**
-     * RESTful method to get all {@link Ingredient} objects ordered descending.
-     *
-     * @return The {@link Ingredient} List.
-     */
-    @GET
-    @Path("desc")
-    @Produces({MediaType.APPLICATION_XML})
-    public List<Ingredient> findByDESC() {
-        return super.findAllIngredientsDESC();
+    public List<Ingredient> findAll() {
+        return super.findAllIngredients();
     }
 
     /**

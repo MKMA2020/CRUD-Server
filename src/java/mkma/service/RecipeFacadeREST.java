@@ -90,8 +90,8 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
     @GET
     @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<Recipe> getRecipesByType( @PathParam("type") RecipeType type) {
-        return super.getRecipesByType(type);
+    public List<Recipe> findRecipesByType( @PathParam("type") RecipeType type) {
+        return super.findRecipesByType(type);
     }
     /**
      * Finds all recipes and orders them by their calorie count

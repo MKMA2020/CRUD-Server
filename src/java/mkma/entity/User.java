@@ -30,7 +30,7 @@ import mkma.enumeration.UserType;
     @NamedQuery (name="findAllUsers",
             query ="SELECT u FROM User u ORDER BY u.fullName ASC"
     ),
-    @NamedQuery (name="getUsersByType",
+    @NamedQuery (name="findUsersByType",
             query ="SELECT u FROM User u WHERE u.type=:type"
     ),
     @NamedQuery (name="findUserByFN",

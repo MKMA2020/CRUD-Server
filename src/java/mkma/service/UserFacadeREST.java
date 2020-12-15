@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mkma.service;
 
 import java.util.List;
@@ -23,7 +18,7 @@ import mkma.enumeration.UserType;
 
 /**
  *
- * @author 2dam
+ * @author Aitor Garcia
  */
 @Stateless
 @Path("mkma.entity.user")
@@ -62,42 +57,45 @@ public class UserFacadeREST extends AbstractFacade<User> {
     public User find(@PathParam("id") Long id) {
         return super.find(id);
     }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     /**
      * Returns a list with all the users.
+     *
      * @return List with all the users.
      */
     @GET
     @Produces({MediaType.APPLICATION_XML})
-    public List<User> findAllUsers() {
+    public List<User> findAll() {
         return super.findAllUsers();
     }
-    
+
     /**
      * Returns a list with users of a type.
+     *
      * @param type Type of the users.
      * @return List with the searched users.
      */
     @GET
     @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<User> findUsersByType(@PathParam("type") UserType type) {
+    public List<User> findByType(@PathParam("type") UserType type) {
         return super.findUsersByType(type);
     }
-    
-    
+
     /**
      * Returns a list of users with a specific name.
+     *
      * @return List with the searched users.
      */
     @GET
     @Path("fullName/{fullName}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<User> findUsersByFN(@PathParam("fullName") String fullName) {
+    public List<User> findByFN(@PathParam("fullName") String fullName) {
         return super.findUsersByFN(fullName);
     }
 }

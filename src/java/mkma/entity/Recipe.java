@@ -34,7 +34,7 @@ import mkma.enumeration.RecipeType;
     )
     ,
     @NamedQuery(
-            name = "getRecipesByType", query = "SELECT r FROM Recipe r WHERE r.type=:type"
+            name = "findRecipesByType", query = "SELECT r FROM Recipe r WHERE r.type=:type"
     )
     ,
     @NamedQuery(
@@ -121,7 +121,7 @@ public class Recipe implements Serializable {
         return name;
     }
 
-    public void setName(String Name) {
+    public void setName(String name) {
         this.name = name;
     }
 
