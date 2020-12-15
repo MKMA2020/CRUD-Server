@@ -154,4 +154,26 @@ public abstract class AbstractFacade<T> {
         recipes = getEntityManager().createNamedQuery("findRecipesByMenu").setParameter("id", id).getResultList();
         return recipes;
     }
+    
+    /**
+     * Returns comments of a recipe
+     * @param id id of the recipe
+     * @return the comments of a recipe
+     */
+    List<User_Recipe> findCommentsByRecipe(Long id) {
+        List<User_Recipe> comments;
+        comments = getEntityManager().createNamedQuery("findCommentsByRecipes").setParameter("id", id).getResultList();
+        return comments;
+    }
+    
+    /**
+     * Returns recipes of a user
+     * @param id id of the user
+     * @return recipes of the user
+     */
+    public List<Recipe> findRecipesByUser(Long id) {
+        List<Recipe> recipes;
+        recipes = getEntityManager().createNamedQuery("findRecipesByUser").setParameter("id", id).getResultList();
+        return recipes;
+    }
 }

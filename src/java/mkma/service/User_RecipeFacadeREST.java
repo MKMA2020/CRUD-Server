@@ -5,6 +5,7 @@
  */
 package mkma.service;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,6 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
+import mkma.entity.Recipe;
 import mkma.entity.User_Recipe;
 import mkma.entity.User_RecipeId;
 
@@ -80,6 +82,30 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    /**
+     * Gets the comments of a recipe
+     * @param id the id for the recipe
+     * @return the comments of a recipe
+     */
+    @GET
+    @Path("comments/{id}")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<User_Recipe> findComments(@PathParam("id") Long id) {
+        return super.findCommentsByRecipe(id);
+    }
+    
+    /**
+     * Gets all the recipes of a user
+     * @param id the id of the user
+     * @return the recipes of the user
+     */
+    @GET
+    @Path("user/recipes/{id}")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<Recipe> findRecipesOfUser(@PathParam("id") Long id) {
+        return super.findRecipesByUser(id);
     }
     
 }

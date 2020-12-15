@@ -35,7 +35,7 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
     /**
      * Inserts a menu object into the menu table
      *
-     * @param a menu object
+     * @param entity a menu object
      */
     @POST
     @Override
@@ -47,7 +47,7 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
     /**
      * Updates a menu object
      *
-     * @param a menu object
+     * @param entity a menu object
      */
     @PUT
     @Consumes({MediaType.APPLICATION_XML})
@@ -69,7 +69,7 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
     /**
      * Finds a menu by id
      *
-     * @param menu's id
+     * @param id menu's id
      * @return menu's data
      */
     @GET
