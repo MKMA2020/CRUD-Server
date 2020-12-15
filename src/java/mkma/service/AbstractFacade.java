@@ -4,10 +4,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import mkma.entity.Recipe;
 import mkma.enumeration.RecipeType;
+import mkma.entity.Ingredient;
+import mkma.enumeration.IngredientType;
+
 
 /**
- * 
- * @author Aitor
+ * The AbstractFacade invokes the entity manager to create the queries.
+ * @author Martin Valiente Ainz
  */
 public abstract class AbstractFacade<T> {
 
@@ -30,6 +33,27 @@ public abstract class AbstractFacade<T> {
 
     public void remove(T entity) {
         getEntityManager().remove(getEntityManager().merge(entity));
+    }
+
+    public List<Ingredient> findAllIngredientsASC() {
+
+        List<Ingredient> ingredients;
+        ingredients = getEntityManager().createNamedQuery("findAllIngredientsASC").getResultList();
+        return ingredients;
+    }
+
+    public List<Ingredient> findAllIngredientsDESC() {
+
+        List<Ingredient> ingredients;
+        ingredients = getEntityManager().createNamedQuery("findAllIngredientsDESC").getResultList();
+        return ingredients;
+    }
+
+    public List<Ingredient> findAllIngredientsByType(IngredientType type) {
+
+        List<Ingredient> ingredients;
+        ingredients = getEntityManager().createNamedQuery("getIngredientsByType").setParameter("type", type).getResultList();
+        return ingredients;
     }
 
     public T find(Object id) {
