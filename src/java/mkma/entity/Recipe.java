@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -26,7 +28,26 @@ import mkma.enumeration.RecipeType;
  * @author Martin Gros
  */
 @Entity
-@Table(name="recipe", schema="mkma")
+@NamedQueries({
+    @NamedQuery(
+            name = "findAllRecipes", query = "SELECT r FROM Recipe r ORDER BY r.name ASC"
+    )
+    ,
+    @NamedQuery(
+            name = "getRecipesByType", query = "SELECT r FROM Recipe r WHERE r.type=:type"
+    )
+    ,
+    @NamedQuery(
+            name = "OrderBykCal", query = "SELECT r FROM Recipe r ORDER BY r.kCal ASC"
+    )
+    ,
+    @NamedQuery(
+            name = "findRecipeById", query = "SELECT r FROM Recipe r WHERE r.id=:id"
+    )
+
+})
+
+@Table(name = "recipe", schema = "mkma")
 @XmlRootElement
 public class Recipe implements Serializable {
 
@@ -42,9 +63,8 @@ public class Recipe implements Serializable {
     /**
      * Name of the Recipe.
      */
-
     @NotNull
-    private String Name;
+    private String name;
 
     /**
      * Steps of the Recipe.
@@ -64,26 +84,25 @@ public class Recipe implements Serializable {
     @NotNull
     @Enumerated(EnumType.STRING)
     private RecipeType type;
-    
+
     /**
      * Ingredient collection of the recipe.
      */
-    @ManyToMany (fetch = FetchType.EAGER, cascade=MERGE)
-    @JoinTable (name = "Recipe_Ingredient", schema = "mkma")
-    private Set <Ingredient> ingredients;
-    
+    @ManyToMany(fetch = FetchType.EAGER, cascade = MERGE)
+    @JoinTable(name = "Recipe_Ingredient", schema = "mkma")
+    private Set<Ingredient> ingredients;
+
     /**
      * Menu-recipes relation collection of the recipe.
      */
-    @OneToMany (cascade = ALL , mappedBy = "recipes")
+    @OneToMany(cascade = ALL, mappedBy = "recipes")
     private Set<Menu_Recipe> menurecipes;
-    
+
     /**
      * Creator of the recipe.
      */
     @ManyToOne
     private User user;
-     
 
     public Long getId() {
         return id;
@@ -94,11 +113,11 @@ public class Recipe implements Serializable {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String Name) {
-        this.Name = Name;
+        this.name = name;
     }
 
     public String getSteps() {
@@ -148,7 +167,5 @@ public class Recipe implements Serializable {
     @Override
     public String toString() {
         return "mkma.entity.Recipe[ id=" + id + " ]";
-    }   
+    }
 }
-
-
