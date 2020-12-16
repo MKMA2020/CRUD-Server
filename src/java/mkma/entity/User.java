@@ -116,7 +116,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch=EAGER)
     private Set<Ingredient> ingredients;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -152,7 +152,7 @@ public class User implements Serializable {
         return type;
     }
 
-    public void setId(long Id_user) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -187,6 +187,32 @@ public class User implements Serializable {
     public void setType(UserType type) {
         this.type = type;
     }
+
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    public Set<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(Set<Menu> menus) {
+        this.menus = menus;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+    
+    
 
     @Override
     public int hashCode() {

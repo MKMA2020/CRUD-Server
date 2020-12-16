@@ -144,6 +144,39 @@ public class Recipe implements Serializable {
         this.type = type;
     }
 
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Set<Menu_Recipe> getMenurecipes() {
+        return menurecipes;
+    }
+
+    public void setMenurecipes(Set<Menu_Recipe> menurecipes) {
+        this.menurecipes = menurecipes;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

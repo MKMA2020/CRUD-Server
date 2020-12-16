@@ -18,4 +18,22 @@ public class User_RecipeId implements Serializable {
         this.userId = userId;
         this.recipeId = recipeId;
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(Long recipeId) {
+        this.recipeId = recipeId;
+    }
+    
+    
 }

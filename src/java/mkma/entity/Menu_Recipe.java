@@ -48,7 +48,7 @@ public class Menu_Recipe implements Serializable {
     private Menu menus;
     
     /**
-     * Recipe Contained in the menu.
+     * Recipes contained in the menu.
      */
     @MapsId("recipeId")
     @ManyToOne

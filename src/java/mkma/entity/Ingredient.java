@@ -18,7 +18,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.IngredientType;
 
 /**
@@ -87,11 +86,11 @@ public class Ingredient implements Serializable {
      */
     private boolean verified;
     
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -109,6 +108,22 @@ public class Ingredient implements Serializable {
 
     public void setType(IngredientType type) {
         this.type = type;
+    }
+    
+    public boolean getVerified() {
+        return verified;
+    }
+    
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+    
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+    
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
     }
 
     //TODO Check whether commentary is necessary.

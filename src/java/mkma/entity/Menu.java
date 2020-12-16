@@ -92,6 +92,24 @@ public class Menu implements Serializable {
         this.type = type;
     }
 
+    public Set<Menu_Recipe> getMenurecipes() {
+        return menurecipes;
+    }
+
+    public void setMenurecipes(Set<Menu_Recipe> menurecipes) {
+        this.menurecipes = menurecipes;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    
+
     //TODO Check whether commentary is necessary.
     @Override
     public int hashCode() {

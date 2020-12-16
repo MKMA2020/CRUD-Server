@@ -18,4 +18,22 @@ public class Menu_RecipeId implements Serializable {
         this.menuId = menuId;
         this.recipeId = recipeId;
     }
+
+    public Long getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(Long menuId) {
+        this.menuId = menuId;
+    }
+
+    public Long getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(Long recipeId) {
+        this.recipeId = recipeId;
+    }
+    
+    
 }

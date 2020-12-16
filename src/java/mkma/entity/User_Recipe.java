@@ -106,6 +106,16 @@ public class User_Recipe implements Serializable {
     public void setRating(float rating) {
         this.rating = rating;
     }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+    
+    
     
     //TODO Check whether commentary is necessary.
     @Override
