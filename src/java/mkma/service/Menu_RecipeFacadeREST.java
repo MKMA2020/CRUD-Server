@@ -24,7 +24,7 @@ import mkma.entity.User;
  * @author 2dam
  */
 @Stateless
-@Path("menu_recipe")
+@Path("recipesInMenu")
 public class Menu_RecipeFacadeREST extends AbstractFacade<Menu_Recipe> {
 
     @PersistenceContext(unitName = "mkmaPU")

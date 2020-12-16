@@ -28,7 +28,7 @@ import mkma.entity.User_RecipeId;
  * @author 2dam
  */
 @Stateless
-@Path("user_recipe")
+@Path("comments")
 public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
 
     @PersistenceContext(unitName = "mkmaPU")

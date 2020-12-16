@@ -26,7 +26,7 @@ import mkma.enumeration.RecipeType;
  * @author 2dam
  */
 @Stateless
-@Path("Galleta")
+@Path("recipe")
 public class RecipeFacadeREST extends AbstractFacade<Recipe> {
 
     @PersistenceContext(unitName = "mkmaPU")
