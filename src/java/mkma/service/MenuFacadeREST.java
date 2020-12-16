@@ -39,7 +39,7 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
      */
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void create(Menu entity) {
         super.create(entity);
     }
@@ -74,7 +74,7 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
      */
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
     public Menu find(@PathParam("id") Long id) {
         return super.find(id);
     }

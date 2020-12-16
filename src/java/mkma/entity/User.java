@@ -116,7 +116,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch=EAGER)
     private Set<Ingredient> ingredients;
 
-    public long getId_user() {
+    public long getId() {
         return id;
     }
 
@@ -152,8 +152,8 @@ public class User implements Serializable {
         return type;
     }
 
-    public void setId_user(long Id_user) {
-        this.id = Id_user;
+    public void setId(long Id_user) {
+        this.id = id;
     }
 
     public void setLogin(String login) {

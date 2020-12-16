@@ -23,7 +23,7 @@ import mkma.enumeration.Menu_recipeType;
 @Entity
 @NamedQueries({
     @NamedQuery (name="findRecipesByMenu",
-            query ="SELECT r FROM Recipe r WHERE r.id=(SELECT mr.recipes.id FROM Menu_Recipe mr WHERE mr.menus.id=:id)"
+            query ="SELECT m , r FROM Recipe r, Menu m WHERE r.id=(SELECT mr.recipes.id FROM Menu_Recipe mr WHERE mr.menus.id=:id)"
     )
 })
 @Table (name = "menu_recipe", schema="mkma")

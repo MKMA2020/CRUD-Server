@@ -40,13 +40,8 @@ import mkma.enumeration.RecipeType;
     @NamedQuery(
             name = "OrderBykCal", query = "SELECT r FROM Recipe r ORDER BY r.kCal ASC"
     )
-    ,
-    @NamedQuery(
-            name = "findRecipeById", query = "SELECT r FROM Recipe r WHERE r.id=:id"
-    )
-
 })
-
+    
 @Table(name = "recipe", schema = "mkma")
 @XmlRootElement
 public class Recipe implements Serializable {

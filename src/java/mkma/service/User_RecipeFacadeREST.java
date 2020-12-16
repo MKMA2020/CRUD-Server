@@ -28,7 +28,7 @@ import mkma.entity.User_RecipeId;
  * @author 2dam
  */
 @Stateless
-@Path("mkma.entity.user_recipe")
+@Path("user_recipe")
 public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
 
     @PersistenceContext(unitName = "mkmaPU")
@@ -52,14 +52,14 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void create(User_Recipe entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void edit(@PathParam("id") PathSegment id, User_Recipe entity) {
         super.edit(entity);
     }
@@ -73,7 +73,7 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
     public User_Recipe find(@PathParam("id") PathSegment id) {
         mkma.entity.User_RecipeId key = getPrimaryKey(id);
         return super.find(key);

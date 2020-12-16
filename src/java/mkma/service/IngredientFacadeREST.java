@@ -40,7 +40,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      */
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void create(Ingredient entity) {
         super.create(entity);
     }
@@ -52,7 +52,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      */
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void edit(@PathParam("id") Long id, Ingredient entity) {
         super.edit(entity);
     }

@@ -93,7 +93,7 @@ public abstract class AbstractFacade<T> {
 
     public List<Recipe> findRecipesByType(RecipeType type) {
         List<Recipe> recipes;
-        recipes = getEntityManager().createNamedQuery("findRecipesByType").getResultList();
+        recipes = getEntityManager().createNamedQuery("findRecipesByType").setParameter("type", type).getResultList();
         return recipes;
     }
 

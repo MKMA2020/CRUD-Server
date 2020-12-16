@@ -21,7 +21,7 @@ import mkma.enumeration.UserType;
  * @author Aitor Garcia
  */
 @Stateless
-@Path("mkma.entity.user")
+@Path("user")
 public class UserFacadeREST extends AbstractFacade<User> {
 
     @PersistenceContext(unitName = "mkmaPU")
@@ -33,14 +33,14 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void create(User entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void edit(@PathParam("id") Long id, User entity) {
         super.edit(entity);
     }
@@ -53,7 +53,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
     public User find(@PathParam("id") Long id) {
         return super.find(id);
     }
