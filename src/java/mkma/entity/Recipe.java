@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import static javax.persistence.FetchType.EAGER;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.RecipeType;
 
 /**
@@ -58,25 +60,21 @@ public class Recipe implements Serializable {
     /**
      * Name of the Recipe.
      */
-    @NotNull
     private String name;
 
     /**
      * Steps of the Recipe.
      */
-    @NotNull
     private String steps;
 
     /**
      * kCal value of the Recipe.
      */
-    @NotNull
     private float kCal;
 
     /**
      * Type of the Recipe.
      */
-    @NotNull
     @Enumerated(EnumType.STRING)
     private RecipeType type;
 
@@ -90,7 +88,7 @@ public class Recipe implements Serializable {
     /**
      * Menu-recipes relation collection of the recipe.
      */
-    @OneToMany(cascade = ALL, mappedBy = "recipes")
+    @OneToMany(cascade = ALL, mappedBy = "recipes", fetch=EAGER)
     private Set<Menu_Recipe> menurecipes;
 
     /**
@@ -143,15 +141,15 @@ public class Recipe implements Serializable {
     public void setType(RecipeType type) {
         this.type = type;
     }
-
+    
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }
-
+    
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
-
+    @XmlTransient
     public Set<Menu_Recipe> getMenurecipes() {
         return menurecipes;
     }
@@ -159,6 +157,7 @@ public class Recipe implements Serializable {
     public void setMenurecipes(Set<Menu_Recipe> menurecipes) {
         this.menurecipes = menurecipes;
     }
+    
 
     public User getUser() {
         return user;

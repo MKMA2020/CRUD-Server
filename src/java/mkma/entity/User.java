@@ -16,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.UserType;
 
 /**
@@ -187,7 +188,8 @@ public class User implements Serializable {
     public void setType(UserType type) {
         this.type = type;
     }
-
+    
+    @XmlTransient
     public Set<Recipe> getRecipes() {
         return recipes;
     }
@@ -195,7 +197,8 @@ public class User implements Serializable {
     public void setRecipes(Set<Recipe> recipes) {
         this.recipes = recipes;
     }
-
+    
+    @XmlTransient
     public Set<Menu> getMenus() {
         return menus;
     }
@@ -203,7 +206,8 @@ public class User implements Serializable {
     public void setMenus(Set<Menu> menus) {
         this.menus = menus;
     }
-
+    
+    @XmlTransient
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }

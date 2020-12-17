@@ -13,6 +13,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.Menu_recipeType;
 
 /**
@@ -23,7 +24,7 @@ import mkma.enumeration.Menu_recipeType;
 @Entity
 @NamedQueries({
     @NamedQuery (name="findRecipesByMenu",
-            query ="SELECT m , r FROM Recipe r, Menu m WHERE r.id=(SELECT mr.recipes.id FROM Menu_Recipe mr WHERE mr.menus.id=:id)"
+            query ="SELECT r FROM Recipe r WHERE r.id=(SELECT mr.recipes.id FROM Menu_Recipe mr WHERE mr.menus.id=:id)"
     )
 })
 @Table (name = "menu_recipe", schema="mkma")
@@ -67,7 +68,8 @@ public class Menu_Recipe implements Serializable {
     public void setId(Menu_RecipeId id) {
         this.id = id;
     }
-
+    
+    @XmlTransient
     public Menu getMenus() {
         return menus;
     }

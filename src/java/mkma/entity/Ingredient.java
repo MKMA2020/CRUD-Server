@@ -10,7 +10,6 @@ import static javax.persistence.FetchType.EAGER;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -18,6 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.IngredientType;
 
 /**
@@ -30,7 +30,8 @@ import mkma.enumeration.IngredientType;
 @NamedQueries({
     @NamedQuery(name = "findAllIngredients",
             query = "SELECT i FROM Ingredient i ORDER BY i.name ASC"
-    ),
+    )
+    ,
     @NamedQuery(name = "getIngredientsByType",
             query = "SELECT i FROM Ingredient i WHERE i.type=:type"
     )
@@ -61,18 +62,23 @@ public class Ingredient implements Serializable {
     private IngredientType type;
 
     /**
+     * Defines if the ingredient is verified.
+     */
+    private boolean verified;
+    
+    /**
+     * Creator of the ingredient.
+     */
+    @ManyToOne
+    private User user;
+    
+    /**
      * Collection of recipes that use the ingredient.
      */
     @ManyToMany(mappedBy = "ingredients", cascade = MERGE, fetch = EAGER)
     private Set<Recipe> recipes;
 
-    /**
-     * Creator of the ingredient.
-     */
-    @JoinColumn
-    @ManyToOne
-    private User user;
-
+    @XmlTransient
     public User getUser() {
         return user;
     }
@@ -80,12 +86,7 @@ public class Ingredient implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-  
-    /**
-     * Defines if the ingredient is verified.
-     */
-    private boolean verified;
-    
+
     public Long getId() {
         return id;
     }
@@ -109,19 +110,20 @@ public class Ingredient implements Serializable {
     public void setType(IngredientType type) {
         this.type = type;
     }
-    
+
     public boolean getVerified() {
         return verified;
     }
-    
+
     public void setVerified(boolean verified) {
         this.verified = verified;
     }
     
+    @XmlTransient
     public Set<Recipe> getRecipes() {
         return recipes;
     }
-    
+
     public void setRecipes(Set<Recipe> recipes) {
         this.recipes = recipes;
     }

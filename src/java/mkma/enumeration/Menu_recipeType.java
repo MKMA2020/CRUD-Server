@@ -11,5 +11,6 @@ public enum Menu_recipeType {
     Secondary,
     Dessert,
     Side,
-    Drink;
+    Drink,
+    Snack;
 }

@@ -74,7 +74,8 @@ public class User_Recipe implements Serializable {
     public void setId(User_RecipeId id) {
         this.id = id;
     }
-
+    
+    
     public User getUsers() {
         return users;
     }

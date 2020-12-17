@@ -89,7 +89,7 @@ public class Menu_RecipeFacadeREST extends AbstractFacade<Menu_Recipe> {
     @GET
     @Path("menu/{id}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<Recipe> findRecipesByMenu(@PathParam("id") Long id) {
+    public List<Recipe> findRecipes(@PathParam("id") Long id) {
         return super.findRecipesByMenu(id);
     }
     
