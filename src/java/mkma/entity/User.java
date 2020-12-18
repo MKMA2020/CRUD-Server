@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,9 +16,12 @@ import static javax.persistence.FetchType.EAGER;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.UserType;
+import security.AlgorithmSHA;
 
 /**
  * Information of a registered user.
@@ -86,14 +90,16 @@ public class User implements Serializable {
      * Last Access Timestamp of the User.
      */
     @NotNull
-    private Timestamp lastAccess;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastAccess;
 
     /**
      * Last Password Change Timestamp of
      * the User.
      */
     @NotNull
-    private Timestamp lastsPasswordChange;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastsPasswordChange;
     
     /**
      * Type of the user.
@@ -144,11 +150,11 @@ public class User implements Serializable {
         return password;
     }
 
-    public Timestamp getLastAccess() {
+    public Date getLastAccess() {
         return lastAccess;
     }
 
-    public Timestamp getLastsPasswordChange() {
+    public Date getLastsPasswordChange() {
         return lastsPasswordChange;
     }
 
@@ -180,11 +186,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public void setLastAccess(Timestamp lastAccess) {
+    public void setLastAccess(Date lastAccess) {
         this.lastAccess = lastAccess;
     }
 
-    public void setLastsPasswordChange(Timestamp lastsPasswordChange) {
+    public void setLastsPasswordChange(Date lastsPasswordChange) {
         this.lastsPasswordChange = lastsPasswordChange;
     }
 

@@ -35,13 +35,14 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Override
     @Consumes({MediaType.APPLICATION_XML})
     public void create(User entity) {
+        //DESENCRIPTAR CONTRASEÑA
+        //HASHEAR CONTRASEÑA
         super.create(entity);
     }
 
     @PUT
-    @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML})
-    public void edit(@PathParam("id") Long id, User entity) {
+    public void edit(User entity) {
         super.edit(entity);
     }
 
