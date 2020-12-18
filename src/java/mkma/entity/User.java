@@ -126,74 +126,146 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch=EAGER)
     private Set<Ingredient> ingredients;
 
+    /**
+     * 
+     * @return id of the user.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * 
+     * @return username of the user.
+     */
     public String getLogin() {
         return login;
     }
 
+    /**
+     * 
+     * @return email of the user.
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * 
+     * @return full name of the user.
+     */
     public String getFullName() {
         return fullName;
     }
 
+    /**
+     * 
+     * @return status of the user.
+     */
     public Boolean getStatus() {
         return status;
     }
 
+    /**
+     * 
+     * @return password of the user.
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * 
+     * @return time of the user's last access.
+     */
     public Date getLastAccess() {
         return lastAccess;
     }
-
+    
+    /**
+     * 
+     * @return time of the user's last password change.
+     */
     public Date getLastsPasswordChange() {
         return lastsPasswordChange;
     }
 
+    /**
+     * 
+     * @return type of the user.
+     */
     public UserType getType() {
         return type;
     }
 
+   /**
+    * 
+    * @param id the id to set.
+    */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @param login the username to set.
+     */
     public void setLogin(String login) {
         this.login = login;
     }
 
+    /**
+     * 
+     * @param email the email to set.
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * 
+     * @param fullName the full name to set.
+     */
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-
+    
+    /**
+     * 
+     * @param status the status to set.
+     */
     public void setStatus(Boolean status) {
         this.status = status;
     }
 
+    /**
+     * 
+     * @param password the password to set.
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * 
+     * @param lastAccess the last access Date to set.
+     */
     public void setLastAccess(Date lastAccess) {
         this.lastAccess = lastAccess;
     }
-
+  
+     /**
+     * 
+     * @param lastsPasswordChange the last password change Date to set.
+     */
     public void setLastsPasswordChange(Date lastsPasswordChange) {
         this.lastsPasswordChange = lastsPasswordChange;
     }
 
+    /**
+     * 
+     * @param type the type to set.
+     */
     public void setType(UserType type) {
         this.type = type;
     }
@@ -227,6 +299,10 @@ public class User implements Serializable {
     
     
 
+    /**
+     * Returns a hashcode if the id is not null.
+     * @return The hashcode of the id.
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -234,6 +310,11 @@ public class User implements Serializable {
         return hash;
     }
 
+    /**
+     * Compares this class to the parameter by their id. 
+     * @param object The object that is compared to the current class.
+     * @return Whether they are equal or not.
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -247,6 +328,10 @@ public class User implements Serializable {
         return true;
     }
 
+    /**
+     * 
+     * @return The name and id of the class.
+     */
     @Override
     public String toString() {
         return "mkma.entity.User[ id=" + id + " ]";
