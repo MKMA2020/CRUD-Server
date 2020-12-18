@@ -1,9 +1,12 @@
 package mkma.service;
 
 import java.util.List;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
+import javax.ws.rs.InternalServerErrorException;
 import mkma.entity.*;
 import mkma.enumeration.*;
+import mkma.exceptions.UserExistsException;
 
 /**
  *
@@ -20,8 +23,13 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-    public void create(T entity) {
-        getEntityManager().persist(entity);
+    public void create(T entity) throws Throwable {
+        try {
+           getEntityManager().persist(entity); 
+        } catch (EntityExistsException e) {
+            throw new InternalServerErrorException().initCause(new UserExistsException());
+        }
+        
     }
 
     public void edit(T entity) {
