@@ -70,44 +70,79 @@ public class Menu implements Serializable {
      */
     @ManyToOne
     private User user;
-
+    /**
+     * @return id of menu
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Sets id of menu
+     * @param id of menu
+     */
     public void setId_menu(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return name of menu
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name of menu
+     * @param name of menu
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return type of menu
+     */
     public MenuType getType() {
         return type;
     }
 
+    /**
+     * Sets menu type
+     * @param type of menu
+     */
     public void setType(MenuType type) {
         this.type = type;
     }
 
+    /**
+     * @return relational field with recipes 
+     */
     public Set<Menu_Recipe> getMenurecipes() {
         return menurecipes;
     }
-
+    
+    /**
+     * Defines the relation of menu and recipes
+     * @param menurecipes the relation with recipes
+     */
     public void setMenurecipes(Set<Menu_Recipe> menurecipes) {
         this.menurecipes = menurecipes;
     }
-
+    
+    /**
+     * 
+     * @return the user creator of the menu 
+     */
     @XmlTransient
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets the creator user
+     * @param user that created the menu
+     */
     public void setUser(User user) {
         this.user = user;
     }
@@ -120,7 +155,7 @@ public class Menu implements Serializable {
         return hash;
     }
 
-    //TODO Check whether commentary is necessary.
+    //TODO Checks    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set

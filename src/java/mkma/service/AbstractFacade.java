@@ -176,4 +176,15 @@ public abstract class AbstractFacade<T> {
         recipes = getEntityManager().createNamedQuery("findRecipesByUser").setParameter("id", id).getResultList();
         return recipes;
     }
+
+    /**
+     * Finds a user with login
+     * @param login the login of the user
+     * @return the data of the user by login
+     */
+    public User userLogin(String login) {
+        User user;
+        user = (User) getEntityManager().createNamedQuery("login").setParameter("login", login).getSingleResult();
+        return user;    
+    }
 }

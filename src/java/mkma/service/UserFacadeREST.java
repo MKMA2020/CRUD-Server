@@ -90,6 +90,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
     /**
      * Returns a list of users with a specific name.
      *
+     * @param fullName name of the user
      * @return List with the searched users.
      */
     @GET
@@ -97,5 +98,17 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Produces({MediaType.APPLICATION_XML})
     public List<User> findByFN(@PathParam("fullName") String fullName) {
         return super.findUsersByFN(fullName);
+    }
+    
+    /**
+     * Returns the user with the specified login
+     * @param login login of the user
+     * @return the data of the user
+     */
+    @GET
+    @Path("login/{login}")
+    @Produces({MediaType.APPLICATION_XML})
+    public User login(@PathParam("login") String login) {
+        return super.userLogin(login);
     }
 }

@@ -36,6 +36,9 @@ import mkma.enumeration.UserType;
     ),
     @NamedQuery (name="findUserByFN",
             query ="SELECT u FROM User u WHERE u.fullName=:fullName"
+    ),
+    @NamedQuery (name="login",
+            query ="SELECT u FROM User u WHERE u.login=:login"
     )
 })
 public class User implements Serializable {
