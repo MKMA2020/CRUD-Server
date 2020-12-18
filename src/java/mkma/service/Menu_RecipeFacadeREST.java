@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mkma.service;
 
 import java.util.List;
@@ -21,13 +16,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
 import mkma.entity.Menu_Recipe;
 import mkma.entity.Menu_RecipeId;
+import mkma.entity.Recipe;
+import mkma.entity.User;
 
 /**
  *
  * @author 2dam
  */
 @Stateless
-@Path("mkma.entity.menu_recipe")
+@Path("recipesInMenu")
 public class Menu_RecipeFacadeREST extends AbstractFacade<Menu_Recipe> {
 
     @PersistenceContext(unitName = "mkmaPU")
@@ -51,14 +48,14 @@ public class Menu_RecipeFacadeREST extends AbstractFacade<Menu_Recipe> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void create(Menu_Recipe entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void edit(@PathParam("id") PathSegment id, Menu_Recipe entity) {
         super.edit(entity);
     }
@@ -72,7 +69,7 @@ public class Menu_RecipeFacadeREST extends AbstractFacade<Menu_Recipe> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
     public Menu_Recipe find(@PathParam("id") PathSegment id) {
         mkma.entity.Menu_RecipeId key = getPrimaryKey(id);
         return super.find(key);
@@ -81,6 +78,19 @@ public class Menu_RecipeFacadeREST extends AbstractFacade<Menu_Recipe> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    /**
+     * Returns a list of recipes from a menu.
+     *
+     * @param id The selected menu id.
+     * @return List of the recipes.
+     */
+    @GET
+    @Path("menu/{id}")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<Recipe> findRecipes(@PathParam("id") Long id) {
+        return super.findRecipesByMenu(id);
     }
     
 }

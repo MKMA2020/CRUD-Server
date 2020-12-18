@@ -13,6 +13,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.Menu_recipeType;
 
 /**
@@ -48,7 +49,7 @@ public class Menu_Recipe implements Serializable {
     private Menu menus;
     
     /**
-     * Recipe Contained in the menu.
+     * Recipes contained in the menu.
      */
     @MapsId("recipeId")
     @ManyToOne
@@ -67,7 +68,8 @@ public class Menu_Recipe implements Serializable {
     public void setId(Menu_RecipeId id) {
         this.id = id;
     }
-
+    
+    @XmlTransient
     public Menu getMenus() {
         return menus;
     }

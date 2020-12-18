@@ -5,6 +5,7 @@
  */
 package mkma.service;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,6 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
+import mkma.entity.Recipe;
 import mkma.entity.User_Recipe;
 import mkma.entity.User_RecipeId;
 
@@ -26,7 +28,7 @@ import mkma.entity.User_RecipeId;
  * @author 2dam
  */
 @Stateless
-@Path("mkma.entity.user_recipe")
+@Path("comments")
 public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
 
     @PersistenceContext(unitName = "mkmaPU")
@@ -50,14 +52,14 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void create(User_Recipe entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML})
     public void edit(@PathParam("id") PathSegment id, User_Recipe entity) {
         super.edit(entity);
     }
@@ -71,7 +73,7 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
     public User_Recipe find(@PathParam("id") PathSegment id) {
         mkma.entity.User_RecipeId key = getPrimaryKey(id);
         return super.find(key);
@@ -80,6 +82,30 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    /**
+     * Gets the comments of a recipe
+     * @param id the id for the recipe
+     * @return the comments of a recipe
+     */
+    @GET
+    @Path("comments/{id}")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<User_Recipe> findComments(@PathParam("id") Long id) {
+        return super.findCommentsByRecipe(id);
+    }
+    
+    /**
+     * Gets all the recipes of a user
+     * @param id the id of the user
+     * @return the recipes of the user
+     */
+    @GET
+    @Path("user/recipes/{id}")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<Recipe> findRecipesOfUser(@PathParam("id") Long id) {
+        return super.findRecipesByUser(id);
     }
     
 }

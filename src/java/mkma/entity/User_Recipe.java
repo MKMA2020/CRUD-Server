@@ -83,6 +83,7 @@ public class User_Recipe implements Serializable {
         this.id = id;
     }
 
+
     /**
      * 
      * @return user that created the comment.
@@ -146,6 +147,16 @@ public class User_Recipe implements Serializable {
     public void setRating(float rating) {
         this.rating = rating;
     }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+    
+    
     
     /**
      * Returns a hashcode if the id is not null.

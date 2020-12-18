@@ -8,16 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import static javax.persistence.FetchType.EAGER;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.RecipeType;
 
 /**
@@ -26,7 +30,21 @@ import mkma.enumeration.RecipeType;
  * @author Martin Gros
  */
 @Entity
-@Table(name="recipe", schema="mkma")
+@NamedQueries({
+    @NamedQuery(
+            name = "findAllRecipes", query = "SELECT r FROM Recipe r ORDER BY r.name ASC"
+    )
+    ,
+    @NamedQuery(
+            name = "findRecipesByType", query = "SELECT r FROM Recipe r WHERE r.type=:type"
+    )
+    ,
+    @NamedQuery(
+            name = "OrderBykCal", query = "SELECT r FROM Recipe r ORDER BY r.kCal ASC"
+    )
+})
+    
+@Table(name = "recipe", schema = "mkma")
 @XmlRootElement
 public class Recipe implements Serializable {
 
@@ -42,42 +60,37 @@ public class Recipe implements Serializable {
     /**
      * Name of the Recipe.
      */
-
-    @NotNull
-    private String Name;
+    private String name;
 
     /**
      * Steps of the Recipe.
      */
-    @NotNull
     private String steps;
 
     /**
      * kCal value of the Recipe.
      */
-    @NotNull
     private float kCal;
 
     /**
      * Type of the Recipe.
      */
-    @NotNull
     @Enumerated(EnumType.STRING)
     private RecipeType type;
-    
+
     /**
      * Ingredient collection of the recipe.
      */
-    @ManyToMany (fetch = FetchType.EAGER, cascade=MERGE)
-    @JoinTable (name = "Recipe_Ingredient", schema = "mkma")
-    private Set <Ingredient> ingredients;
-    
+    @ManyToMany(fetch = FetchType.EAGER, cascade = MERGE)
+    @JoinTable(name = "Recipe_Ingredient", schema = "mkma")
+    private Set<Ingredient> ingredients;
+
     /**
      * Menu-recipes relation collection of the recipe.
      */
-    @OneToMany (cascade = ALL , mappedBy = "recipes")
+    @OneToMany(cascade = ALL, mappedBy = "recipes", fetch=EAGER)
     private Set<Menu_Recipe> menurecipes;
-    
+
     /**
      * Creator of the recipe.
      */
@@ -88,7 +101,7 @@ public class Recipe implements Serializable {
      * Defines if the recipe is verified.
      */
     private boolean verified;
-     
+
     public Long getId() {
         return id;
     }
@@ -98,11 +111,11 @@ public class Recipe implements Serializable {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSteps() {
@@ -128,7 +141,41 @@ public class Recipe implements Serializable {
     public void setType(RecipeType type) {
         this.type = type;
     }
+    
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+    
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+    @XmlTransient
+    public Set<Menu_Recipe> getMenurecipes() {
+        return menurecipes;
+    }
 
+    public void setMenurecipes(Set<Menu_Recipe> menurecipes) {
+        this.menurecipes = menurecipes;
+    }
+    
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -152,7 +199,5 @@ public class Recipe implements Serializable {
     @Override
     public String toString() {
         return "mkma.entity.Recipe[ id=" + id + " ]";
-    }   
+    }
 }
-
-

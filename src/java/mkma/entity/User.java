@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,8 +16,12 @@ import static javax.persistence.FetchType.EAGER;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.UserType;
+import security.AlgorithmSHA;
 
 /**
  * Information of a registered user.
@@ -30,11 +35,14 @@ import mkma.enumeration.UserType;
     @NamedQuery (name="findAllUsers",
             query ="SELECT u FROM User u ORDER BY u.fullName ASC"
     ),
-    @NamedQuery (name="getUsersByType",
+    @NamedQuery (name="findUsersByType",
             query ="SELECT u FROM User u WHERE u.type=:type"
     ),
     @NamedQuery (name="findUserByFN",
             query ="SELECT u FROM User u WHERE u.fullName=:fullName"
+    ),
+    @NamedQuery (name="login",
+            query ="SELECT u FROM User u WHERE u.login=:login"
     )
 })
 public class User implements Serializable {
@@ -82,14 +90,16 @@ public class User implements Serializable {
      * Last Access Timestamp of the User.
      */
     @NotNull
-    private Timestamp lastAccess;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastAccess;
 
     /**
      * Last Password Change Timestamp of
      * the User.
      */
     @NotNull
-    private Timestamp lastsPasswordChange;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastsPasswordChange;
     
     /**
      * Type of the user.
@@ -120,7 +130,7 @@ public class User implements Serializable {
      * 
      * @return id of the user.
      */
-    public long getId_user() {
+    public Long getId() {
         return id;
     }
 
@@ -168,15 +178,15 @@ public class User implements Serializable {
      * 
      * @return time of the user's last access.
      */
-    public Timestamp getLastAccess() {
+    public Date getLastAccess() {
         return lastAccess;
     }
-
+    
     /**
      * 
      * @return time of the user's last password change.
      */
-    public Timestamp getLastsPasswordChange() {
+    public Date getLastsPasswordChange() {
         return lastsPasswordChange;
     }
 
@@ -190,10 +200,10 @@ public class User implements Serializable {
 
    /**
     * 
-    * @param Id_user the id to set.
+    * @param id the id to set.
     */
-    public void setId_user(long Id_user) {
-        this.id = Id_user;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -238,17 +248,17 @@ public class User implements Serializable {
 
     /**
      * 
-     * @param lastAccess the last access time to set.
+     * @param lastAccess the last access Date to set.
      */
-    public void setLastAccess(Timestamp lastAccess) {
+    public void setLastAccess(Date lastAccess) {
         this.lastAccess = lastAccess;
     }
-
-    /**
+  
+     /**
      * 
-     * @param lastsPasswordChange the last password change time to set.
+     * @param lastsPasswordChange the last password change Date to set.
      */
-    public void setLastsPasswordChange(Timestamp lastsPasswordChange) {
+    public void setLastsPasswordChange(Date lastsPasswordChange) {
         this.lastsPasswordChange = lastsPasswordChange;
     }
 
@@ -259,6 +269,35 @@ public class User implements Serializable {
     public void setType(UserType type) {
         this.type = type;
     }
+    
+    @XmlTransient
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+    
+    @XmlTransient
+    public Set<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(Set<Menu> menus) {
+        this.menus = menus;
+    }
+    
+    @XmlTransient
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+    
+    
 
     /**
      * Returns a hashcode if the id is not null.
