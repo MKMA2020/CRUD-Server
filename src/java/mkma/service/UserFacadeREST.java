@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -73,7 +74,11 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @GET
     @Produces({MediaType.APPLICATION_XML})
     public List<User> findAll() throws ReadingException {
-        return super.findAllUsers();
+        try{
+            return super.findAllUsers();
+        }catch(ReadingException ex){
+            throw new InternalServerErrorException(ex);
+        }
     }
 
     /**
@@ -87,7 +92,11 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
     public List<User> findByType(@PathParam("type") UserType type) throws ReadingException {
-        return super.findUsersByType(type);
+        try{
+            return super.findUsersByType(type);
+        }catch(ReadingException ex){
+            throw new InternalServerErrorException(ex);
+        }
     }
 
     /**
@@ -101,7 +110,11 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Path("fullName/{fullName}")
     @Produces({MediaType.APPLICATION_XML})
     public List<User> findByFN(@PathParam("fullName") String fullName) throws ReadingException {
-        return super.findUsersByFN(fullName);
+        try{
+            return super.findUsersByFN(fullName);
+        }catch(ReadingException ex){
+            throw new InternalServerErrorException(ex);
+        }
     }
     
     /**
@@ -114,6 +127,10 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Path("login/{login}/{password}")
     @Produces({MediaType.APPLICATION_XML})
     public User login(@PathParam("login") String login, @PathParam("password") String password) {
-        return super.userLogin(login, password);
+        try{
+            return super.userLogin(login, password);
+        }catch(Exception ex){
+            throw new InternalServerErrorException(ex);
+        }
     }
 }

@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -82,7 +83,11 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
     @GET
     @Produces({MediaType.APPLICATION_XML})
     public List<Recipe> findAll() throws ReadingException {
-        return super.findAllRecipes();
+        try{
+            return super.findAllRecipes();
+        }catch(ReadingException ex){
+            throw new InternalServerErrorException(ex);
+        }
     }
     /**
      * Find recipes by their type. The method receives the type
@@ -94,7 +99,12 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
     @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
     public List<Recipe> findByType( @PathParam("type") RecipeType type) throws ReadingException {
-        return super.findRecipesByType(type);
+        
+        try{
+            return super.findRecipesByType(type);
+        }catch(ReadingException ex){
+            throw new InternalServerErrorException(ex);
+        }
     }
    
 }

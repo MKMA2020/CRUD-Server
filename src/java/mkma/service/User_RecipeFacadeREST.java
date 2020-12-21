@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -95,7 +96,11 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
     @Path("comments/{id}")
     @Produces({MediaType.APPLICATION_XML})
     public List<User_Recipe> findComments(@PathParam("id") Long id) throws ReadingException {
-        return super.findCommentsByRecipe(id);
+        try{
+            return super.findCommentsByRecipe(id);
+        }catch(ReadingException ex){
+            throw new InternalServerErrorException(ex);
+        }
     }
     
     /**
@@ -108,7 +113,11 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
     @Path("user/recipes/{id}")
     @Produces({MediaType.APPLICATION_XML})
     public List<Recipe> findRecipesOfUser(@PathParam("id") Long id) throws ReadingException {
-        return super.findRecipesByUser(id);
+        try{
+            return super.findRecipesByUser(id);
+        }catch(ReadingException ex){
+            throw new InternalServerErrorException(ex);
+        }
     }
     
 }
