@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -99,7 +100,11 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
     @GET
     @Produces(MediaType.APPLICATION_XML)
     public List<Menu> findAll() throws ReadingException {
+        try {
         return super.findAllMenus();
+        } catch (ReadingException ex) {
+            throw new InternalServerErrorException(ex);
+        }
     }
 
     /**
@@ -113,7 +118,11 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
     @Path("type/{type}")
     @Produces(MediaType.APPLICATION_XML)
     public List<Menu> findByType(@PathParam("type") MenuType type) throws ReadingException {
-        return super.findMenusByType(type);
+        try {
+            return super.findMenusByType(type);
+        } catch (ReadingException ex) {
+            throw new InternalServerErrorException(ex);
+        }
     }
 
 }
