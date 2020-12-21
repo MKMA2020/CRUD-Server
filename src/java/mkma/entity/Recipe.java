@@ -38,10 +38,6 @@ import mkma.enumeration.RecipeType;
     @NamedQuery(
             name = "findRecipesByType", query = "SELECT r FROM Recipe r WHERE r.type=:type"
     )
-    ,
-    @NamedQuery(
-            name = "OrderBykCal", query = "SELECT r FROM Recipe r ORDER BY r.kCal ASC"
-    )
 })
     
 @Table(name = "recipe", schema = "mkma")

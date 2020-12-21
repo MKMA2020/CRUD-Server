@@ -20,6 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import mkma.entity.Recipe;
 import mkma.enumeration.RecipeType;
+import mkma.exceptions.ReadingException;
 
 /**
  *
@@ -39,7 +40,7 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML})
-    public void create(Recipe entity) {
+    public void create(Recipe entity) throws Throwable {
         super.create(entity);
     }
 
@@ -75,33 +76,25 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
     
     /**
      * find all recipes and orders them by theirn name on asc
-     * @return 
+     * @return
+     * @throws ReadingException if there is an issue when reading
      */
     @GET
     @Produces({MediaType.APPLICATION_XML})
-    public List<Recipe> findAllRecipes() {
+    public List<Recipe> findAll() throws ReadingException {
         return super.findAllRecipes();
     }
     /**
      * Find recipes by their type. The method receives the type
      * @param type
      * @return 
+     * @throws ReadingException if there is an issue when reading
      */
     @GET
     @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<Recipe> findRecipesByType( @PathParam("type") RecipeType type) {
+    public List<Recipe> findByType( @PathParam("type") RecipeType type) throws ReadingException {
         return super.findRecipesByType(type);
-    }
-    /**
-     * Finds all recipes and orders them by their calorie count
-     * @return 
-     */
-    @GET
-    @Path("kcal")
-    @Produces({MediaType.APPLICATION_XML})
-    public List<Recipe> OrderBykCal() {
-        return super.OrderBykCal();
     }
    
 }

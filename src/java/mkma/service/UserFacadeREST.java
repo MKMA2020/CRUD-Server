@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import mkma.entity.User;
 import mkma.enumeration.UserType;
+import mkma.exceptions.ReadingException;
 
 /**
  *
@@ -34,7 +35,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML})
-    public void create(User entity) {
+    public void create(User entity) throws Throwable {
         super.create(entity);
     }
 
@@ -67,10 +68,11 @@ public class UserFacadeREST extends AbstractFacade<User> {
      * Returns a list with all the users.
      *
      * @return List with all the users.
+     * @throws ReadingException if there is an issue when reading
      */
     @GET
     @Produces({MediaType.APPLICATION_XML})
-    public List<User> findAll() {
+    public List<User> findAll() throws ReadingException {
         return super.findAllUsers();
     }
 
@@ -79,11 +81,12 @@ public class UserFacadeREST extends AbstractFacade<User> {
      *
      * @param type Type of the users.
      * @return List with the searched users.
+     * @throws ReadingException if there is an issue when reading
      */
     @GET
     @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<User> findByType(@PathParam("type") UserType type) {
+    public List<User> findByType(@PathParam("type") UserType type) throws ReadingException {
         return super.findUsersByType(type);
     }
 
@@ -92,23 +95,25 @@ public class UserFacadeREST extends AbstractFacade<User> {
      *
      * @param fullName name of the user
      * @return List with the searched users.
+     * @throws ReadingException if there is an issue when reading
      */
     @GET
     @Path("fullName/{fullName}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<User> findByFN(@PathParam("fullName") String fullName) {
+    public List<User> findByFN(@PathParam("fullName") String fullName) throws ReadingException {
         return super.findUsersByFN(fullName);
     }
     
     /**
      * Returns the user with the specified login
      * @param login login of the user
+     * @param password hashed password of the user
      * @return the data of the user
      */
     @GET
-    @Path("login/{login}")
+    @Path("login/{login}/{password}")
     @Produces({MediaType.APPLICATION_XML})
-    public User login(@PathParam("login") String login) {
-        return super.userLogin(login);
+    public User login(@PathParam("login") String login, @PathParam("password") String password) {
+        return super.userLogin(login, password);
     }
 }

@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -15,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import mkma.entity.Ingredient;
 import mkma.enumeration.IngredientType;
+import mkma.exceptions.ReadingException;
 
 /**
  * RESTful web service class that has CRUD operations for {@link Ingredient}
@@ -41,7 +43,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML})
-    public void create(Ingredient entity) {
+    public void create(Ingredient entity) throws Throwable {
         super.create(entity);
     }
 
@@ -87,8 +89,13 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      */
     @GET
     @Produces({MediaType.APPLICATION_XML})
-    public List<Ingredient> findAll() {
-        return super.findAllIngredients();
+    public List<Ingredient> findAll() throws ReadingException {
+        try {
+            return super.findAllIngredients();
+        } catch (ReadingException ex) {
+            throw new InternalServerErrorException(ex);
+        }
+        
     }
 
     /**
@@ -96,12 +103,17 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      *
      * @param type The {@link IngredientType}.
      * @return The {@link Ingredient} List.
+     * @throws ReadingException if there is an issue when reading
      */
     @GET
     @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<Ingredient> findByType(@PathParam("type") IngredientType type) {
-        return super.findAllIngredientsByType(type);
+    public List<Ingredient> findByType(@PathParam("type") IngredientType type) throws ReadingException {
+        try {
+            return super.findAllIngredientsByType(type);
+        } catch (ReadingException ex) {
+            throw new InternalServerErrorException(ex);
+        }       
     }
 
     @Override
