@@ -1,4 +1,4 @@
-package security;
+package mkma.security;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
