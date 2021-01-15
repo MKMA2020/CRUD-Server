@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.IngredientType;
@@ -51,13 +50,11 @@ public class Ingredient implements Serializable {
     /**
      * Name of the Ingredient.
      */
-    @NotNull
     private String name;
 
     /**
      * Type of the ingredient
      */
-    @NotNull
     @Enumerated(EnumType.STRING)
     private IngredientType type;
 
@@ -65,63 +62,81 @@ public class Ingredient implements Serializable {
      * Defines if the ingredient is verified.
      */
     private boolean verified;
-    
+
     /**
      * Creator of the ingredient.
      */
     @ManyToOne
     private User user;
-    
+
     /**
      * Collection of recipes that use the ingredient.
      */
     @ManyToMany(mappedBy = "ingredients", cascade = MERGE, fetch = EAGER)
     private Set<Recipe> recipes;
 
+    /**
+     * @return Returns the ID of the Ingredient Object.
+     */
+    public Long getId() {
+        return id;
+    }
+    
+    /**
+     * @return Returns the Name of the Ingredient Object.
+     */
+    public String getName() {
+        return name;
+    }
+    
+    /**
+     * @return Returns the Type of the Ingredient Object.
+     */
+    public IngredientType getType() {
+        return type;
+    }
+    
+    /**
+     * @return Returns if the Ingredient is Verified.
+     */
+    public boolean getVerified() {
+        return verified;
+    }
+    
+    /**
+     * @return Returns if the User object related to the Ingredient.
+     */
     @XmlTransient
     public User getUser() {
         return user;
     }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Long getId() {
-        return id;
+    
+    /**
+     * @return Returns the Recipe collection related to the Ingredient.
+     */
+    @XmlTransient
+    public Set<Recipe> getRecipes() {
+        return recipes;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public IngredientType getType() {
-        return type;
     }
 
     public void setType(IngredientType type) {
         this.type = type;
     }
 
-    public boolean getVerified() {
-        return verified;
-    }
-
     public void setVerified(boolean verified) {
         this.verified = verified;
     }
-    
-    @XmlTransient
-    public Set<Recipe> getRecipes() {
-        return recipes;
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setRecipes(Set<Recipe> recipes) {
