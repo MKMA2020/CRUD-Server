@@ -20,7 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import mkma.entity.Recipe;
 import mkma.enumeration.RecipeType;
-import mkma.exceptions.ReadingException;
+import mkma.exceptions.DatabaseException;
 
 /**
  *
@@ -77,23 +77,23 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
     /**
      * find all recipes and orders them by theirn name on asc
      * @return
-     * @throws ReadingException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Produces({MediaType.APPLICATION_XML})
-    public List<Recipe> findAll() throws ReadingException {
+    public List<Recipe> findAll() throws DatabaseException {
         return super.findAllRecipes();
     }
     /**
      * Find recipes by their type. The method receives the type
      * @param type
      * @return 
-     * @throws ReadingException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<Recipe> findByType( @PathParam("type") RecipeType type) throws ReadingException {
+    public List<Recipe> findByType( @PathParam("type") RecipeType type) throws DatabaseException {
         return super.findRecipesByType(type);
     }
    

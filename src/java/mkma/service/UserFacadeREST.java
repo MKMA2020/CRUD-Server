@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import mkma.entity.User;
 import mkma.enumeration.UserType;
-import mkma.exceptions.ReadingException;
+import mkma.exceptions.DatabaseException;
 
 /**
  *
@@ -68,11 +68,11 @@ public class UserFacadeREST extends AbstractFacade<User> {
      * Returns a list with all the users.
      *
      * @return List with all the users.
-     * @throws ReadingException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Produces({MediaType.APPLICATION_XML})
-    public List<User> findAll() throws ReadingException {
+    public List<User> findAll() throws DatabaseException {
         return super.findAllUsers();
     }
 
@@ -81,12 +81,12 @@ public class UserFacadeREST extends AbstractFacade<User> {
      *
      * @param type Type of the users.
      * @return List with the searched users.
-     * @throws ReadingException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<User> findByType(@PathParam("type") UserType type) throws ReadingException {
+    public List<User> findByType(@PathParam("type") UserType type) throws DatabaseException {
         return super.findUsersByType(type);
     }
 
@@ -95,12 +95,12 @@ public class UserFacadeREST extends AbstractFacade<User> {
      *
      * @param fullName name of the user
      * @return List with the searched users.
-     * @throws ReadingException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Path("fullName/{fullName}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<User> findByFN(@PathParam("fullName") String fullName) throws ReadingException {
+    public List<User> findByFN(@PathParam("fullName") String fullName) throws DatabaseException {
         return super.findUsersByFN(fullName);
     }
     

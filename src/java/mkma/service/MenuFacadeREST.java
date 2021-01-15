@@ -16,7 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import mkma.entity.Menu;
 import mkma.enumeration.MenuType;
-import mkma.exceptions.ReadingException;
+import mkma.exceptions.DatabaseException;
 
 /**
  * Contains the RESTful methods for the menu entity
@@ -95,14 +95,14 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
      * Finds every menu
      *
      * @return a list of the menus
-     * @throws ReadingException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public List<Menu> findAll() throws ReadingException {
+    public List<Menu> findAll() throws DatabaseException {
         try {
         return super.findAllMenus();
-        } catch (ReadingException ex) {
+        } catch (DatabaseException ex) {
             throw new InternalServerErrorException(ex);
         }
     }
@@ -112,15 +112,15 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
      *
      * @param type the type to be searched
      * @return a list of the menus with that type
-     * @throws ReadingException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Path("type/{type}")
     @Produces(MediaType.APPLICATION_XML)
-    public List<Menu> findByType(@PathParam("type") MenuType type) throws ReadingException {
+    public List<Menu> findByType(@PathParam("type") MenuType type) throws DatabaseException {
         try {
             return super.findMenusByType(type);
-        } catch (ReadingException ex) {
+        } catch (DatabaseException ex) {
             throw new InternalServerErrorException(ex);
         }
     }

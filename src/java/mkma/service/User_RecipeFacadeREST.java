@@ -22,7 +22,7 @@ import javax.ws.rs.core.PathSegment;
 import mkma.entity.Recipe;
 import mkma.entity.User_Recipe;
 import mkma.entity.User_RecipeId;
-import mkma.exceptions.ReadingException;
+import mkma.exceptions.DatabaseException;
 
 /**
  *
@@ -89,12 +89,12 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
      * Gets the comments of a recipe
      * @param id the id for the recipe
      * @return the comments of a recipe
-     * @throws ReadingException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Path("comments/{id}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<User_Recipe> findComments(@PathParam("id") Long id) throws ReadingException {
+    public List<User_Recipe> findComments(@PathParam("id") Long id) throws DatabaseException {
         return super.findCommentsByRecipe(id);
     }
     
@@ -102,12 +102,12 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
      * Gets all the recipes of a user
      * @param id the id of the user
      * @return the recipes of the user
-     * @throws ReadingException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Path("user/recipes/{id}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<Recipe> findRecipesOfUser(@PathParam("id") Long id) throws ReadingException {
+    public List<Recipe> findRecipesOfUser(@PathParam("id") Long id) throws DatabaseException {
         return super.findRecipesByUser(id);
     }
     

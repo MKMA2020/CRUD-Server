@@ -8,9 +8,9 @@ import java.util.logging.Logger;
  *
  * @author Martin Gros
  */
-public class ReadingException extends Exception {
+public class DatabaseException extends Exception {
 
-    public ReadingException() {
+    public DatabaseException() {
         final Logger LOG = Logger.getLogger("mkma.enumeration.ReadingException.java");
         LOG.log(Level.SEVERE, "Unexpected response from the server");
     }

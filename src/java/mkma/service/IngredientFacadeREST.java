@@ -16,7 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import mkma.entity.Ingredient;
 import mkma.enumeration.IngredientType;
-import mkma.exceptions.ReadingException;
+import mkma.exceptions.DatabaseException;
 
 /**
  * RESTful web service class that has CRUD operations for {@link Ingredient}
@@ -89,10 +89,10 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      */
     @GET
     @Produces({MediaType.APPLICATION_XML})
-    public List<Ingredient> findAll() throws ReadingException {
+    public List<Ingredient> findAll() throws DatabaseException {
         try {
             return super.findAllIngredients();
-        } catch (ReadingException ex) {
+        } catch (DatabaseException ex) {
             throw new InternalServerErrorException(ex);
         }
         
@@ -103,15 +103,15 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      *
      * @param type The {@link IngredientType}.
      * @return The {@link Ingredient} List.
-     * @throws ReadingException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Path("type/{type}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<Ingredient> findByType(@PathParam("type") IngredientType type) throws ReadingException {
+    public List<Ingredient> findByType(@PathParam("type") IngredientType type) throws DatabaseException {
         try {
             return super.findAllIngredientsByType(type);
-        } catch (ReadingException ex) {
+        } catch (DatabaseException ex) {
             throw new InternalServerErrorException(ex);
         }       
     }

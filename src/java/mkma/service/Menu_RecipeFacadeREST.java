@@ -19,7 +19,7 @@ import mkma.entity.Menu_Recipe;
 import mkma.entity.Menu_RecipeId;
 import mkma.entity.Recipe;
 import mkma.entity.User;
-import mkma.exceptions.ReadingException;
+import mkma.exceptions.DatabaseException;
 
 /**
  *
@@ -87,15 +87,15 @@ public class Menu_RecipeFacadeREST extends AbstractFacade<Menu_Recipe> {
      *
      * @param id The selected menu id.
      * @return List of the recipes.
-     * @throws ReadingException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Path("menu/{id}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<Recipe> findRecipes(@PathParam("id") Long id) throws ReadingException {
+    public List<Recipe> findRecipes(@PathParam("id") Long id) throws DatabaseException {
         try {
         return super.findRecipesByMenu(id);
-        } catch (ReadingException ex) {
+        } catch (DatabaseException ex) {
             throw new InternalServerErrorException(ex);
         }
     }
