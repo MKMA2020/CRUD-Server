@@ -51,6 +51,12 @@ public class Menu implements Serializable {
      */
     @NotNull
     private String name;
+    
+    /**
+     * Short description of the menu.
+     */
+    @NotNull
+    private String description;
 
     /**
      * Type of the menu.
@@ -84,6 +90,24 @@ public class Menu implements Serializable {
     public void setId_menu(Long id) {
         this.id = id;
     }
+    
+    /**
+     * Gets the description of the menu
+     * @return description of menu
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Sets description for the menu    
+     * @param description of the menu
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
 
     /**
      * @return name of menu

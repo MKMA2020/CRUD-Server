@@ -29,20 +29,17 @@ import mkma.enumeration.UserType;
 @Table(name = "user", schema = "mkma")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "findAllUsers",
-            query = "SELECT u FROM User u ORDER BY u.fullName ASC"
-    )
-    ,
-    @NamedQuery(name = "findUsersByType",
-            query = "SELECT u FROM User u WHERE u.type=:type"
-    )
-    ,
-    @NamedQuery(name = "findUserByFN",
-            query = "SELECT u FROM User u WHERE u.fullName=:fullName"
-    )
-    ,
-    @NamedQuery(name = "login",
-            query = "SELECT u FROM User u WHERE u.login=:login"
+    @NamedQuery (name="findAllUsers",
+            query ="SELECT u FROM User u ORDER BY u.fullName ASC"
+    ),
+    @NamedQuery (name="findUsersByType",
+            query ="SELECT u FROM User u WHERE u.type=:type"
+    ),
+    @NamedQuery (name="findUserByFN",
+            query ="SELECT u FROM User u WHERE u.fullName=:fullName"
+    ),
+    @NamedQuery (name="login",
+            query ="SELECT u FROM User u WHERE u.login=:login AND u.password=:password"
     )
 })
 

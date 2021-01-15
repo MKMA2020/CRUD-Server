@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -18,6 +19,7 @@ import mkma.entity.Menu_Recipe;
 import mkma.entity.Menu_RecipeId;
 import mkma.entity.Recipe;
 import mkma.entity.User;
+import mkma.exceptions.DatabaseException;
 
 /**
  *
@@ -49,7 +51,7 @@ public class Menu_RecipeFacadeREST extends AbstractFacade<Menu_Recipe> {
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML})
-    public void create(Menu_Recipe entity) {
+    public void create(Menu_Recipe entity) throws Throwable {
         super.create(entity);
     }
 
@@ -85,12 +87,17 @@ public class Menu_RecipeFacadeREST extends AbstractFacade<Menu_Recipe> {
      *
      * @param id The selected menu id.
      * @return List of the recipes.
+     * @throws DatabaseException if there is an issue when reading
      */
     @GET
     @Path("menu/{id}")
     @Produces({MediaType.APPLICATION_XML})
-    public List<Recipe> findRecipes(@PathParam("id") Long id) {
+    public List<Recipe> findRecipes(@PathParam("id") Long id) throws DatabaseException {
+        try {
         return super.findRecipesByMenu(id);
+        } catch (DatabaseException ex) {
+            throw new InternalServerErrorException(ex);
+        }
     }
     
 }
