@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import mkma.entity.User;
 import mkma.enumeration.UserType;
+import security.AlgorithmSHA;
 
 /**
  *
@@ -37,12 +38,14 @@ public class UserFacadeREST extends AbstractFacade<User> {
     public void create(User entity) {
         //DESENCRIPTAR CONTRASEÑA
         //HASHEAR CONTRASEÑA
+        entity.setPassword(AlgorithmSHA.encrypt(entity.getPassword()));
         super.create(entity);
     }
 
     @PUT
     @Consumes({MediaType.APPLICATION_XML})
     public void edit(User entity) {
+        entity.setPassword(AlgorithmSHA.encrypt(entity.getPassword()));
         super.edit(entity);
     }
 
