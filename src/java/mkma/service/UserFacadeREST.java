@@ -1,5 +1,6 @@
 package mkma.service;
 
+import java.util.Arrays;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,6 +17,8 @@ import javax.ws.rs.core.MediaType;
 import mkma.entity.User;
 import mkma.enumeration.UserType;
 import mkma.exceptions.DatabaseException;
+import mkma.security.AlgorithmSHA;
+import mkma.security.Ciphering;
 
 /**
  *
@@ -24,6 +27,9 @@ import mkma.exceptions.DatabaseException;
 @Stateless
 @Path("user")
 public class UserFacadeREST extends AbstractFacade<User> {
+
+    private Ciphering ciphering;
+    private AlgorithmSHA hashPass;
 
     @PersistenceContext(unitName = "mkmaPU")
     private EntityManager em;
@@ -35,10 +41,11 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML})
-  
+
     public void create(User entity) throws Throwable {
-        //DESENCRIPTAR CONTRASEÑA
-        //HASHEAR CONTRASEÑA
+        byte[] pass = ciphering.descifrarTexto(entity.getPassword().getBytes());
+        String hashedPass = hashPass.encrypt(Arrays.toString(pass));
+        entity.setPassword(hashedPass);
         super.create(entity);
     }
 
@@ -105,17 +112,20 @@ public class UserFacadeREST extends AbstractFacade<User> {
     public List<User> findByFN(@PathParam("fullName") String fullName) throws DatabaseException {
         return super.findUsersByFN(fullName);
     }
-    
+
     /**
      * Returns the user with the specified login
+     *
      * @param login login of the user
-     * @param password hashed password of the user
+     * @param password un-hashed password of the user
      * @return the data of the user
      */
     @GET
     @Path("login/{login}/{password}")
     @Produces({MediaType.APPLICATION_XML})
     public User login(@PathParam("login") String login, @PathParam("password") String password) {
-        return super.userLogin(login, password);
+        byte[] pass = ciphering.descifrarTexto(password.getBytes());
+        String hashedPass = hashPass.encrypt(Arrays.toString(pass));
+        return super.userLogin(login, hashedPass);
     }
 }
