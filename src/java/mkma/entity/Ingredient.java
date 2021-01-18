@@ -120,31 +120,59 @@ public class Ingredient implements Serializable {
         return recipes;
     }
 
+    /**
+     * 
+     * @param id the id to set.
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @param name the name to set.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * 
+     * @param type the type to set.
+     */
     public void setType(IngredientType type) {
         this.type = type;
     }
 
+    /**
+     * 
+     * @param verified the verified state to set.
+     */
     public void setVerified(boolean verified) {
         this.verified = verified;
     }
 
+    /**
+     * 
+     * @param user the user to set.
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * 
+     * @param recipes the recipe group to set.
+     */
     public void setRecipes(Set<Recipe> recipes) {
         this.recipes = recipes;
     }
 
-    //TODO Check whether commentary is necessary.
+    /**
+     * Returns a hashcode if the id is not null.
+     *
+     * @return The hashcode of the id.
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -152,7 +180,12 @@ public class Ingredient implements Serializable {
         return hash;
     }
 
-    //TODO Check whether commentary is necessary.
+    /**
+     * Compares this class to the parameter by their id.
+     *
+     * @param object The object that is compared to the current class.
+     * @return Whether they are equal or not.
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -166,7 +199,10 @@ public class Ingredient implements Serializable {
         return true;
     }
 
-    //TODO Check whether commentary is necessary.
+    /**
+     *
+     * @return The name and id of the class.
+     */
     @Override
     public String toString() {
         return "mkma.entity.Ingredient[ id=" + id + " ]";

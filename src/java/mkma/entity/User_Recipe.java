@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Defines the relation between User and Recipe.
+ * Defines the comment from a User on a Recipe.
  * 
  * @author Aitor & Kerman
  */
@@ -33,7 +33,7 @@ public class User_Recipe implements Serializable {
     private static final long serialVersionUID = 1L;
     
     /**
-     * Id of the relation between a user and a recipe.
+     * Id of the comment.
      */
     @EmbeddedId
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -69,7 +69,7 @@ public class User_Recipe implements Serializable {
 
     /**
      * 
-     * @return id of the user_recipe relation.
+     * @return id of the comment.
      */
     public User_RecipeId getId() {
         return id;
@@ -118,7 +118,7 @@ public class User_Recipe implements Serializable {
 
     /**
      * 
-     * @return comment of the recipe.
+     * @return text of the comment of the recipe.
      */
     public String getComment() {
         return comment;
@@ -148,10 +148,18 @@ public class User_Recipe implements Serializable {
         this.rating = rating;
     }
 
+    /**
+     * 
+     * @return whether the comment is verified or not.
+     */
     public boolean isVerified() {
         return verified;
     }
 
+    /**
+     * 
+     * @param verified the verified state to set.
+     */
     public void setVerified(boolean verified) {
         this.verified = verified;
     }
