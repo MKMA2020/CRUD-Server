@@ -21,9 +21,7 @@ public class AlgorithmSHA {
      * @return SHA digested String.
      */
     public static String encrypt(String text) {
-        
-        //LOG.log(Level.INFO, AlgorithmSHA.class.getName() + "." + AlgorithmSHA.class.getEnclosingMethod().getName() + " called.");
-        
+      
         MessageDigest messageDigest;
         byte[] bytes = null;
         
@@ -44,7 +42,6 @@ public class AlgorithmSHA {
         } catch (NoSuchAlgorithmException e) {
             LOG.log(Level.SEVERE, "Specified algorithm does not exist.");
         }
-        //LOG.log(Level.INFO, AlgorithmSHA.class.getName() + AlgorithmSHA.class.getEnclosingMethod().getName() + " done.");
         return Arrays.toString(bytes);
     }
 
