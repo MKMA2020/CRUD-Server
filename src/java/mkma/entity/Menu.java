@@ -171,7 +171,11 @@ public class Menu implements Serializable {
         this.user = user;
     }
 
-    //TODO Check whether commentary is necessary.
+    /**
+     * Returns a hashcode if the id is not null.
+     *
+     * @return The hashcode of the id.
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -179,7 +183,12 @@ public class Menu implements Serializable {
         return hash;
     }
 
-    //TODO Checks    
+    /**
+     * Compares this class to the parameter by their id.
+     *
+     * @param object The object that is compared to the current class.
+     * @return Whether they are equal or not.
+     */   
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -193,7 +202,10 @@ public class Menu implements Serializable {
         return true;
     }
 
-    //TODO Check whether commentary is necessary.
+    /**
+     *
+     * @return The name and id of the class.
+     */
     @Override
     public String toString() {
         return "mkma.entity.Menu[ id=" + id + " ]";
