@@ -1,7 +1,9 @@
 package mkma.service;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -16,6 +18,9 @@ import javax.ws.rs.core.MediaType;
 import mkma.entity.User;
 import mkma.enumeration.UserType;
 import mkma.exceptions.DatabaseException;
+import mkma.mail.MailSender;
+import mkma.security.AlgorithmSHA;
+import static mkma.security.PasswordGen.generatePass;
 
 /**
  *
@@ -117,5 +122,29 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Produces({MediaType.APPLICATION_XML})
     public User login(@PathParam("login") String login, @PathParam("password") String password) {
         return super.userLogin(login, password);
+    }
+    
+    @GET
+    @Path("reset/{login}/{email}")
+    public void resetPassword(@PathParam("login") String login, @PathParam("email") String email) throws DatabaseException, MessagingException {
+        List<User> users = super.findAllUsers();
+        User t = null;
+        for (User user: users) {
+            if(user.getEmail().equalsIgnoreCase(email) && user.getLogin().equalsIgnoreCase(login)){
+                t = user;
+                break;
+            }
+            
+        }
+        String newPass = generatePass();
+        MailSender mail = new MailSender("mkma.info@gmail.com", "abcd*1234", "smtp.gmail.com", 465);
+        String subject = "PocketChef: Your password has been reset!";
+        String text = ("Hello " + t.getLogin()+ ", Your password has been reset, so here's your new one: " + newPass);
+        mail.sendMail(email, subject, text);
+        // Set and encrypt new password to entity
+        t.setPassword(AlgorithmSHA.encrypt(newPass));
+        t.setLastsPasswordChange(new Date());
+        
+        super.edit(t);
     }
 }
