@@ -5,8 +5,10 @@
  */
 package mkma.security;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
@@ -14,6 +16,7 @@ import java.security.PublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.Cipher;
+import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.codec.binary.Base32;
 
 /**
@@ -53,12 +56,13 @@ public class Ciphering {
      * @param mensaje El mensaje a descifrar
      * @return El mensaje descifrado
      */
-    public byte[] descifrarTexto(byte[] mensaje) {
+    public byte[] descifrarTexto(String mensaje) {
+        byte[] toDecode = hexStringToByteArray(mensaje);
         byte[] decodedMessage = null;
-        Base32 base = new Base32();
         try {
             // Private Key
-            byte fileKey[] = fileReader(getClass().getResource("Private.key").getFile());
+            byte fileKey[] = getPrivateFileKey();
+           // byte fileKey[] = fileReader(getClass().getResource("Private.key").getFile());
             //getClass().getResource("c:\\\\claves\\\\Public.key");
             System.out.println("SIZE:--> " + fileKey.length + " bytes");
 
@@ -68,8 +72,8 @@ public class Ciphering {
 
             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
-            decodedMessage = cipher.doFinal(mensaje);
-            decodedMessage = base.decode(decodedMessage);
+           
+           decodedMessage = cipher.doFinal(toDecode);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,6 +95,33 @@ public class Ciphering {
             e.printStackTrace();
         }
         return ret;
+    }
+    
+    public byte[] getPrivateFileKey() throws IOException {
+
+        InputStream keyfis = Ciphering.class.getClassLoader()
+                .getResourceAsStream("mkma/security/Private.key");
+       
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len;
+        // read bytes from the input stream and store them in buffer
+        while ((len = keyfis.read(buffer)) != -1) {
+            // write bytes from the buffer into output stream
+            os.write(buffer, 0, len);
+        }
+        keyfis.close();
+        return os.toByteArray();
+    }
+    
+     public static byte[] hexStringToByteArray(String s) {
+        int len = s.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
+                    + Character.digit(s.charAt(i + 1), 16));
+        }
+        return data;
     }
 
 }

@@ -40,7 +40,7 @@ public class KeyGenerator {
 
             // Private key se pueden guardar en cualquier ruta absoluta
             PKCS8EncodedKeySpec pKCS8EncodedKeySpec = new PKCS8EncodedKeySpec(privateKey.getEncoded());
-            fileOutputStream = new FileOutputStream("sc:\\claves\\Private.key");
+            fileOutputStream = new FileOutputStream("c:\\claves\\Private.key");
             fileOutputStream.write(pKCS8EncodedKeySpec.getEncoded());
             fileOutputStream.close();
         } catch (Exception e) {

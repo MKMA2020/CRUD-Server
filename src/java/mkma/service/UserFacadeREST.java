@@ -1,6 +1,7 @@
 package mkma.service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -28,8 +29,8 @@ import mkma.security.Ciphering;
 @Path("user")
 public class UserFacadeREST extends AbstractFacade<User> {
 
-    private Ciphering ciphering;
-    private AlgorithmSHA hashPass;
+    private Ciphering ciphering = new Ciphering();
+    private AlgorithmSHA hashPass = new AlgorithmSHA();
 
     @PersistenceContext(unitName = "mkmaPU")
     private EntityManager em;
@@ -43,9 +44,13 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Consumes({MediaType.APPLICATION_XML})
 
     public void create(User entity) throws Throwable {
-        byte[] pass = ciphering.descifrarTexto(entity.getPassword().getBytes());
+        byte[] pass = ciphering.descifrarTexto(entity.getPassword());
         String hashedPass = hashPass.encrypt(Arrays.toString(pass));
         entity.setPassword(hashedPass);
+        entity.setStatus(Boolean.TRUE);
+        entity.setType(UserType.Normal);
+        entity.setLastAccess(new Date());
+        entity.setLastAccess(new Date());
         super.create(entity);
     }
 
@@ -124,7 +129,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Path("login/{login}/{password}")
     @Produces({MediaType.APPLICATION_XML})
     public User login(@PathParam("login") String login, @PathParam("password") String password) {
-        byte[] pass = ciphering.descifrarTexto(password.getBytes());
+        byte[] pass = ciphering.descifrarTexto(password);
         String hashedPass = hashPass.encrypt(Arrays.toString(pass));
         return super.userLogin(login, hashedPass);
     }
