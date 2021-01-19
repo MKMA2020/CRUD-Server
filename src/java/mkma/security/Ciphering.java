@@ -14,16 +14,18 @@ import java.security.PublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.Cipher;
+import org.apache.commons.codec.binary.Base32;
 
 /**
  * Methods to encrypt and decrypt
  *
  * @author Martin Gros
  */
-public class PbKandPvKMethods {
+public class Ciphering {
 
     public byte[] cifrarTexto(String mensaje) {
         byte[] encodedMessage = null;
+        Base32 base = new Base32();
         try {
             // Public Key loaded from a relative path (keys are placed inside the project)
             byte fileKey[] = fileReader(getClass().getResource("Public.key").getFile());
@@ -37,6 +39,7 @@ public class PbKandPvKMethods {
             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             encodedMessage = cipher.doFinal(mensaje.getBytes());
+            encodedMessage = base.encode(encodedMessage);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,8 +53,9 @@ public class PbKandPvKMethods {
      * @param mensaje El mensaje a descifrar
      * @return El mensaje descifrado
      */
-    byte[] descifrarTexto(byte[] mensaje) {
+    public byte[] descifrarTexto(byte[] mensaje) {
         byte[] decodedMessage = null;
+        Base32 base = new Base32();
         try {
             // Private Key
             byte fileKey[] = fileReader(getClass().getResource("Private.key").getFile());
@@ -65,6 +69,7 @@ public class PbKandPvKMethods {
             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
             decodedMessage = cipher.doFinal(mensaje);
+            decodedMessage = base.decode(decodedMessage);
         } catch (Exception e) {
             e.printStackTrace();
         }
