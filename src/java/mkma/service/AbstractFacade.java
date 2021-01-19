@@ -1,17 +1,13 @@
 package mkma.service;
 
 import java.util.List;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.ws.rs.ForbiddenException;
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.NotAuthorizedException;
 import mkma.entity.*;
 import mkma.enumeration.*;
 import mkma.exceptions.IncorrectCredentialsException;
 import mkma.exceptions.DatabaseException;
-import mkma.exceptions.UserExistsException;
 
 /**
  *

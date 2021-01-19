@@ -40,6 +40,7 @@ import mkma.enumeration.IngredientType;
 public class Ingredient implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     /**
      * ID of the Ingredient.
      */
@@ -81,28 +82,28 @@ public class Ingredient implements Serializable {
     public Long getId() {
         return id;
     }
-    
+
     /**
      * @return Returns the Name of the Ingredient Object.
      */
     public String getName() {
         return name;
     }
-    
+
     /**
      * @return Returns the Type of the Ingredient Object.
      */
     public IngredientType getType() {
         return type;
     }
-    
+
     /**
      * @return Returns if the Ingredient is Verified.
      */
     public boolean getVerified() {
         return verified;
     }
-    
+
     /**
      * @return Returns if the User object related to the Ingredient.
      */
@@ -110,7 +111,7 @@ public class Ingredient implements Serializable {
     public User getUser() {
         return user;
     }
-    
+
     /**
      * @return Returns the Recipe collection related to the Ingredient.
      */
