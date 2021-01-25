@@ -19,7 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.RecipeType;
@@ -98,80 +97,157 @@ public class Recipe implements Serializable {
      */
     private boolean verified;
 
+    /**
+     * 
+     * @return id of the recipe.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id the id to set.
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return name of the recipe.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * 
+     * @param name the name to set.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * 
+     * @return steps of the recipe.
+     */
     public String getSteps() {
         return steps;
     }
 
+    /**
+     * 
+     * @param steps the steps to set.
+     */
     public void setSteps(String steps) {
         this.steps = steps;
     }
 
+    /**
+     * 
+     * @return kcal amount of the recipe.
+     */
     public float getkCal() {
         return kCal;
     }
 
+    /**
+     * 
+     * @param kCal the kcal amount to set.
+     */
     public void setkCal(float kCal) {
         this.kCal = kCal;
     }
 
+    /**
+     * 
+     * @return type of the recipe.
+     */
     public RecipeType getType() {
         return type;
     }
 
+    /**
+     * 
+     * @param type the type to set.
+     */
     public void setType(RecipeType type) {
         this.type = type;
     }
     
+    /**
+     * 
+     * @return ingredient group of the recipe.
+     */
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }
     
+    /**
+     * 
+     * @param ingredients the ingredient group to set.
+     */
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
+    
+    /**
+     * 
+     * @return relation between menu and recipes.
+     */
     @XmlTransient
     public Set<Menu_Recipe> getMenurecipes() {
         return menurecipes;
     }
 
+    /**
+     * 
+     * @param menurecipes the relation between menu and recipes to set.
+     */
     public void setMenurecipes(Set<Menu_Recipe> menurecipes) {
         this.menurecipes = menurecipes;
     }
     
 
+    /**
+     * 
+     * @return user creator of the recipe.
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * 
+     * @param user the user to set.
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * 
+     * @return whether the recipe is verified or not.
+     */
     public boolean isVerified() {
         return verified;
     }
 
+    /**
+     * 
+     * @param verified the verified state to set.
+     */
     public void setVerified(boolean verified) {
         this.verified = verified;
     }
 
-    
+    /**
+     * Returns a hashcode if the id is not null.
+     *
+     * @return The hashcode of the id.
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -179,6 +255,12 @@ public class Recipe implements Serializable {
         return hash;
     }
 
+    /**
+     * Compares this class to the parameter by their id.
+     *
+     * @param object The object that is compared to the current class.
+     * @return Whether they are equal or not.
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -192,6 +274,10 @@ public class Recipe implements Serializable {
         return true;
     }
 
+    /**
+     *
+     * @return The name and id of the class.
+     */
     @Override
     public String toString() {
         return "mkma.entity.Recipe[ id=" + id + " ]";

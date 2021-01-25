@@ -1,9 +1,8 @@
 package mkma.enumeration;
 
 /**
- * The different types of Ingredients.
- * 
- * @author Kerman & Aitor
+ * Igredient Type Enumeration.
+ * @author Kerman And aitor
  */
 public enum IngredientType {
     Dairy,

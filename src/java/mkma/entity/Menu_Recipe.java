@@ -61,40 +61,76 @@ public class Menu_Recipe implements Serializable {
     @Enumerated(EnumType.STRING)
     private Menu_recipeType type;
 
+    /**
+     * 
+     * @return id of the relation.
+     */
     public Menu_RecipeId getId() {
          return id;
     }
 
+    /**
+     * 
+     * @param id the id to set.
+     */
     public void setId(Menu_RecipeId id) {
         this.id = id;
     }
     
+    /**
+     * 
+     * @return the menu of the relation.
+     */
     @XmlTransient
     public Menu getMenus() {
         return menus;
     }
 
+    /**
+     * 
+     * @param menus the menu to set.
+     */
     public void setMenus(Menu menus) {
         this.menus = menus;
     }
 
+    /**
+     * 
+     * @return the recipe of the relation.
+     */
     public Recipe getRecipes() {
         return recipes;
     }
 
+    /**
+     * 
+     * @param recipes the recipe to set.
+     */
     public void setRecipes(Recipe recipes) {
         this.recipes = recipes;
     }
 
+    /**
+     * 
+     * @return the type of the relation.
+     */
     public Menu_recipeType getType() {
         return type;
     }
 
+    /**
+     * 
+     * @param type the type to set.
+     */
     public void setType(Menu_recipeType type) {
         this.type = type;
     }
 
-    //TODO Check whether commentary is necessary.
+    /**
+     * Returns a hashcode if the id is not null.
+     *
+     * @return The hashcode of the id.
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -102,7 +138,12 @@ public class Menu_Recipe implements Serializable {
         return hash;
     }
 
-    //TODO Check whether commentary is necessary.
+    /**
+     * Compares this class to the parameter by their id.
+     *
+     * @param object The object that is compared to the current class.
+     * @return Whether they are equal or not.
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -116,7 +157,10 @@ public class Menu_Recipe implements Serializable {
         return true;
     }
 
-    //TODO Check whether commentary is necessary.
+    /**
+     *
+     * @return The name and id of the class.
+     */
     @Override
     public String toString() {
         return "mkma.entity.Menu_Recipe[ id=" + id + " ]";
