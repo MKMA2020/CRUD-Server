@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 import mkma.entity.User;
 import mkma.enumeration.UserType;
 import mkma.exceptions.DatabaseException;
+import mkma.exceptions.UserExistsException;
 import mkma.security.AlgorithmSHA;
 import mkma.security.Ciphering;
 
@@ -50,7 +51,12 @@ public class UserFacadeREST extends AbstractFacade<User> {
         entity.setStatus(Boolean.TRUE);
         entity.setType(UserType.Normal);
         entity.setLastAccess(new Date());
-        entity.setLastAccess(new Date());
+        entity.setLastsPasswordChange(new Date());
+        List <User> users = super.findAllUsers();
+        for (User u:users) {
+            if (u.getLogin().equals(entity.getLogin()))
+                throw new UserExistsException();
+        }
         super.create(entity);
     }
 
