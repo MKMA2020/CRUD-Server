@@ -238,10 +238,13 @@ public abstract class AbstractFacade<T> {
      */
     public User userLogin(String login, String password) {
         User user;
+        try {
         user = (User) getEntityManager().createNamedQuery("login").setParameter("login", login).setParameter("password", password).getSingleResult();
-        if (user == null) {
+        } catch (NoResultException ex) {
             throw new ForbiddenException(new IncorrectCredentialsException());
         }
+        getEntityManager().detach(user);
+        user.setPassword("");
         return user;
     }
 }
