@@ -77,6 +77,7 @@ public class Ingredient implements Serializable {
     private Set<Recipe> recipes;
 
     /**
+     * Getter for Id.
      * @return Returns the ID of the Ingredient Object.
      */
     public Long getId() {
@@ -84,6 +85,7 @@ public class Ingredient implements Serializable {
     }
 
     /**
+     * Getter for Name.
      * @return Returns the Name of the Ingredient Object.
      */
     public String getName() {
@@ -91,6 +93,7 @@ public class Ingredient implements Serializable {
     }
 
     /**
+     * Getter for IngredientType.
      * @return Returns the Type of the Ingredient Object.
      */
     public IngredientType getType() {
@@ -98,6 +101,7 @@ public class Ingredient implements Serializable {
     }
 
     /**
+     * Getter for Verified.
      * @return Returns if the Ingredient is Verified.
      */
     public boolean getVerified() {
@@ -105,6 +109,7 @@ public class Ingredient implements Serializable {
     }
 
     /**
+     * Getter for User.
      * @return Returns if the User object related to the Ingredient.
      */
     @XmlTransient
@@ -113,6 +118,7 @@ public class Ingredient implements Serializable {
     }
 
     /**
+     * Getter for Set of recipe.
      * @return Returns the Recipe collection related to the Ingredient.
      */
     @XmlTransient
@@ -121,7 +127,7 @@ public class Ingredient implements Serializable {
     }
 
     /**
-     * 
+     * Setter for Id.
      * @param id the id to set.
      */
     public void setId(Long id) {
@@ -129,7 +135,7 @@ public class Ingredient implements Serializable {
     }
 
     /**
-     * 
+     * Setter for Name.
      * @param name the name to set.
      */
     public void setName(String name) {
@@ -137,7 +143,7 @@ public class Ingredient implements Serializable {
     }
 
     /**
-     * 
+     * Setter for IngredientType.
      * @param type the type to set.
      */
     public void setType(IngredientType type) {
@@ -145,7 +151,7 @@ public class Ingredient implements Serializable {
     }
 
     /**
-     * 
+     * Setter for Verified.
      * @param verified the verified state to set.
      */
     public void setVerified(boolean verified) {
@@ -153,7 +159,7 @@ public class Ingredient implements Serializable {
     }
 
     /**
-     * 
+     * Setter for User.
      * @param user the user to set.
      */
     public void setUser(User user) {
@@ -161,7 +167,7 @@ public class Ingredient implements Serializable {
     }
 
     /**
-     * 
+     * Setter for Set of recipe.
      * @param recipes the recipe group to set.
      */
     public void setRecipes(Set<Recipe> recipes) {

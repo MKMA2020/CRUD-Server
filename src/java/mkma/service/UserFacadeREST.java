@@ -56,7 +56,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
         entity.setStatus(Boolean.TRUE);
         entity.setType(UserType.Normal);
         entity.setLastAccess(new Date());
-        entity.setLastAccess(new Date());
+        entity.setLastsPasswordChange(new Date());
         super.create(entity);
     }
 

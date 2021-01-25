@@ -121,7 +121,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Receives the type and orders all receipes by their type
-     * @param type
+     * @param type The Recipe Type.
      * @return a list of recipes
      * @throws DatabaseException if there is an issue when reading
      */
@@ -152,7 +152,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Returns a list of all premium users.
-     * @param type
+     * @param type The User type.
      * @return premUsers: contains all premium users.
      * @throws DatabaseException if there is an issue when reading
      */

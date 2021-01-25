@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 /**
  * Contains the IDs of the User - Recipe relation.
  * 
- * @author Kerman & Aitor
+ * @author Kerman and Aitor
  */
 @Embeddable
 public class User_RecipeId implements Serializable {

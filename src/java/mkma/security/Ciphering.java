@@ -16,8 +16,6 @@ import java.security.PublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.Cipher;
-import javax.xml.bind.DatatypeConverter;
-import org.apache.commons.codec.binary.Base32;
 
 /**
  * Methods to encrypt and decrypt
@@ -28,7 +26,6 @@ public class Ciphering {
 
     public byte[] cifrarTexto(String mensaje) {
         byte[] encodedMessage = null;
-        Base32 base = new Base32();
         try {
             // Public Key loaded from a relative path (keys are placed inside the project)
             byte fileKey[] = fileReader(getClass().getResource("Public.key").getFile());
@@ -42,7 +39,6 @@ public class Ciphering {
             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             encodedMessage = cipher.doFinal(mensaje.getBytes());
-            encodedMessage = base.encode(encodedMessage);
         } catch (Exception e) {
             e.printStackTrace();
         }

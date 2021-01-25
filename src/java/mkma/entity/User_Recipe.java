@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Defines the comment from a User on a Recipe.
  * 
- * @author Aitor & Kerman
+ * @author Aitor and Kerman
  */
 @Entity
 @NamedQueries({
