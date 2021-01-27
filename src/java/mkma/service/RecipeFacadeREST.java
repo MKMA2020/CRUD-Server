@@ -40,20 +40,20 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML})
-    public void create(Recipe entity) throws Throwable {
+    public void create(Recipe entity) throws DatabaseException {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML})
-    public void edit(@PathParam("id") Long id, Recipe entity) {
+    public void edit(@PathParam("id") Long id, Recipe entity) throws DatabaseException {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+    public void remove(@PathParam("id") Long id) throws DatabaseException {
         super.remove(super.find(id));
     }
     /**

@@ -52,7 +52,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Override
     @Consumes({MediaType.APPLICATION_XML})
 
-    public void create(User entity) throws Throwable {
+    public void create(User entity) throws DatabaseException {
         byte[] pass = ciphering.descifrarTexto(entity.getPassword());
         String hashedPass = hashPass.encrypt(Arrays.toString(pass));
         entity.setPassword(hashedPass);
@@ -71,13 +71,13 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
     @PUT
     @Consumes({MediaType.APPLICATION_XML})
-    public void edit(User entity) {
+    public void edit(User entity) throws DatabaseException {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+    public void remove(@PathParam("id") Long id) throws DatabaseException {
         super.remove(super.find(id));
     }
 

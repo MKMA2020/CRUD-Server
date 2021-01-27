@@ -54,20 +54,20 @@ public class User_RecipeFacadeREST extends AbstractFacade<User_Recipe> {
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML})
-    public void create(User_Recipe entity) throws Throwable {
+    public void create(User_Recipe entity) throws DatabaseException {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML})
-    public void edit(@PathParam("id") PathSegment id, User_Recipe entity) {
+    public void edit(@PathParam("id") PathSegment id, User_Recipe entity) throws DatabaseException {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") PathSegment id) {
+    public void remove(@PathParam("id") PathSegment id) throws DatabaseException {
         mkma.entity.User_RecipeId key = getPrimaryKey(id);
         super.remove(super.find(key));
     }

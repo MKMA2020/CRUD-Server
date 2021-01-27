@@ -42,7 +42,7 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML})
-    public void create(Menu entity) throws Throwable {
+    public void create(Menu entity) throws DatabaseException {
         super.create(entity);
     }
 
@@ -53,7 +53,7 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
      */
     @PUT
     @Consumes({MediaType.APPLICATION_XML})
-    public void edit(Menu entity) {
+    public void edit(Menu entity) throws DatabaseException {
         super.edit(entity);
     }
 
@@ -64,7 +64,7 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
      */
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+    public void remove(@PathParam("id") Long id) throws DatabaseException {
         super.remove(super.find(id));
     }
 

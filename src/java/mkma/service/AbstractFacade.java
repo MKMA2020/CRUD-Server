@@ -24,15 +24,15 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-    public void create(T entity) throws Throwable {
+    public void create(T entity) throws DatabaseException {
             getEntityManager().persist(entity); 
     }
 
-    public void edit(T entity) {
+    public void edit(T entity) throws DatabaseException{
         getEntityManager().merge(entity);
     }
 
-    public void remove(T entity) {
+    public void remove(T entity) throws DatabaseException{
         getEntityManager().remove(getEntityManager().merge(entity));
     }
 
@@ -49,10 +49,8 @@ public abstract class AbstractFacade<T> {
         List<Menu> menus = null;
         try {
             menus = getEntityManager().createNamedQuery("findAllMenus").getResultList();
-        } catch (NoResultException ex) {
-            
         } catch (Exception ex) {
-            
+            throw new DatabaseException();
         }
         return menus;
     }

@@ -65,7 +65,7 @@ public class Recipe implements Serializable {
     /**
      * kCal value of the Recipe.
      */
-    private float kCal;
+    private float kcal;
 
     /**
      * Type of the Recipe.
@@ -145,20 +145,12 @@ public class Recipe implements Serializable {
         this.steps = steps;
     }
 
-    /**
-     * 
-     * @return kcal amount of the recipe.
-     */
-    public float getkCal() {
-        return kCal;
+    public float getKcal() {
+        return kcal;
     }
 
-    /**
-     * 
-     * @param kCal the kcal amount to set.
-     */
-    public void setkCal(float kCal) {
-        this.kCal = kCal;
+    public void setKcal(float kcal) {
+        this.kcal = kcal;
     }
 
     /**
