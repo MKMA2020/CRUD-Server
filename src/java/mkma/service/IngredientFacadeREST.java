@@ -55,7 +55,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML})
-    public void edit(@PathParam("id") Long id, Ingredient entity) {
+    public void edit(@PathParam("id") Long id, Ingredient entity) throws DatabaseException {
         super.edit(entity);
     }
 
@@ -66,7 +66,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      */
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+    public void remove(@PathParam("id") Long id) throws DatabaseException {
         super.remove(super.find(id));
     }
 

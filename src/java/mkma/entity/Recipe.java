@@ -19,7 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import mkma.enumeration.RecipeType;
@@ -66,7 +65,7 @@ public class Recipe implements Serializable {
     /**
      * kCal value of the Recipe.
      */
-    private float kCal;
+    private float kcal;
 
     /**
      * Type of the Recipe.
@@ -122,12 +121,12 @@ public class Recipe implements Serializable {
         this.steps = steps;
     }
 
-    public float getkCal() {
-        return kCal;
+    public float getKcal() {
+        return kcal;
     }
 
-    public void setkCal(float kCal) {
-        this.kCal = kCal;
+    public void setKcal(float kcal) {
+        this.kcal = kcal;
     }
 
     public RecipeType getType() {
