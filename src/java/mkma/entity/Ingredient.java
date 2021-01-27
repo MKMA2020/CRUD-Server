@@ -40,6 +40,7 @@ import mkma.enumeration.IngredientType;
 public class Ingredient implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     /**
      * ID of the Ingredient.
      */
@@ -76,42 +77,48 @@ public class Ingredient implements Serializable {
     private Set<Recipe> recipes;
 
     /**
+     * Getter for Id.
      * @return Returns the ID of the Ingredient Object.
      */
     public Long getId() {
         return id;
     }
-    
+
     /**
+     * Getter for Name.
      * @return Returns the Name of the Ingredient Object.
      */
     public String getName() {
         return name;
     }
-    
+
     /**
+     * Getter for IngredientType.
      * @return Returns the Type of the Ingredient Object.
      */
     public IngredientType getType() {
         return type;
     }
-    
+
     /**
+     * Getter for Verified.
      * @return Returns if the Ingredient is Verified.
      */
     public boolean getVerified() {
         return verified;
     }
-    
+
     /**
+     * Getter for User.
      * @return Returns if the User object related to the Ingredient.
      */
     @XmlTransient
     public User getUser() {
         return user;
     }
-    
+
     /**
+     * Getter for Set of recipe.
      * @return Returns the Recipe collection related to the Ingredient.
      */
     @XmlTransient
@@ -119,31 +126,59 @@ public class Ingredient implements Serializable {
         return recipes;
     }
 
+    /**
+     * Setter for Id.
+     * @param id the id to set.
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Setter for Name.
+     * @param name the name to set.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Setter for IngredientType.
+     * @param type the type to set.
+     */
     public void setType(IngredientType type) {
         this.type = type;
     }
 
+    /**
+     * Setter for Verified.
+     * @param verified the verified state to set.
+     */
     public void setVerified(boolean verified) {
         this.verified = verified;
     }
 
+    /**
+     * Setter for User.
+     * @param user the user to set.
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * Setter for Set of recipe.
+     * @param recipes the recipe group to set.
+     */
     public void setRecipes(Set<Recipe> recipes) {
         this.recipes = recipes;
     }
 
-    //TODO Check whether commentary is necessary.
+    /**
+     * Returns a hashcode if the id is not null.
+     *
+     * @return The hashcode of the id.
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -151,7 +186,12 @@ public class Ingredient implements Serializable {
         return hash;
     }
 
-    //TODO Check whether commentary is necessary.
+    /**
+     * Compares this class to the parameter by their id.
+     *
+     * @param object The object that is compared to the current class.
+     * @return Whether they are equal or not.
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -165,7 +205,10 @@ public class Ingredient implements Serializable {
         return true;
     }
 
-    //TODO Check whether commentary is necessary.
+    /**
+     *
+     * @return The name and id of the class.
+     */
     @Override
     public String toString() {
         return "mkma.entity.Ingredient[ id=" + id + " ]";

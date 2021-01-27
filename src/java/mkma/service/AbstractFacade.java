@@ -1,17 +1,13 @@
 package mkma.service;
 
 import java.util.List;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.ws.rs.ForbiddenException;
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.NotAuthorizedException;
 import mkma.entity.*;
 import mkma.enumeration.*;
 import mkma.exceptions.IncorrectCredentialsException;
 import mkma.exceptions.DatabaseException;
-import mkma.exceptions.UserExistsException;
 
 /**
  *
@@ -123,7 +119,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Receives the type and orders all receipes by their type
-     * @param type
+     * @param type The Recipe Type.
      * @return a list of recipes
      * @throws DatabaseException if there is an issue when reading
      */
@@ -154,7 +150,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Returns a list of all premium users.
-     * @param type
+     * @param type The User type.
      * @return premUsers: contains all premium users.
      * @throws DatabaseException if there is an issue when reading
      */

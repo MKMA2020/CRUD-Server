@@ -21,7 +21,7 @@ public class AlgorithmSHA {
      * @return SHA digested String.
      */
     public static String encrypt(String text) {
-         
+      
         MessageDigest messageDigest;
         byte[] bytes = null;
         

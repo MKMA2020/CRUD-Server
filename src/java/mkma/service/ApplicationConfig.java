@@ -22,6 +22,7 @@ public class ApplicationConfig extends Application {
      * It is automatically populated with
      * all resources defined in the project.
      * If required, comment out calling this method in getClasses().
+     * @param resources The resources.
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(mkma.service.IngredientFacadeREST.class);

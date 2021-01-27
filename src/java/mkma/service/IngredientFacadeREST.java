@@ -38,7 +38,8 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
     /**
      * RESTful method to create a {@link Ingredient} object.
      *
-     * @param ingredient The {@link Ingredient} object.
+     * @param entity The {@link Ingredient} object.
+     * @throws java.lang.Throwable If there is any exception.
      */
     @POST
     @Override
@@ -50,7 +51,8 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
     /**
      * RESTful method to update a {@link Ingredient} object.
      *
-     * @param ingredient The {@link Ingredient} object.
+     * @param id The {@link Ingredient} Id.
+     * @param entity The {@link Ingredient} object.
      */
     @PUT
     @Path("{id}")
@@ -62,7 +64,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
     /**
      * RESTful method to delete a {@link Ingredient} object.
      *
-     * @param ingredient The {@link Ingredient} object.
+     * @param id The {@link Ingredient} Id
      */
     @DELETE
     @Path("{id}")
@@ -73,6 +75,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
     /**
      * RESTful method to get a {@link Ingredient} object by id.
      *
+     * @param id The {@link Ingredient} Id.
      * @return The {@link Ingredient} object.
      */
     @GET
@@ -89,7 +92,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      */
     @GET
     @Produces({MediaType.APPLICATION_XML})
-    public List<Ingredient> findAll() throws DatabaseException {
+    public List<Ingredient> findAll(){
         try {
             return super.findAllIngredients();
         } catch (DatabaseException ex) {
@@ -103,7 +106,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      *
      * @param type The {@link IngredientType}.
      * @return The {@link Ingredient} List.
-     * @throws DatabaseException if there is an issue when reading
+     * @throws DatabaseException if there is an issue when reading.
      */
     @GET
     @Path("type/{type}")
@@ -115,7 +118,11 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
             throw new InternalServerErrorException(ex);
         }       
     }
-
+    
+    /**
+     * Entity Manager getter.
+     * @return The Entity Manager Object.
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
