@@ -39,12 +39,12 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
      * RESTful method to create a {@link Ingredient} object.
      *
      * @param entity The {@link Ingredient} object.
-     * @throws java.lang.Throwable If there is any exception.
+     * @throws mkma.exceptions.DatabaseException
      */
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML})
-    public void create(Ingredient entity) throws Throwable {
+    public void create(Ingredient entity) throws DatabaseException {
         super.create(entity);
     }
 
