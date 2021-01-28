@@ -245,4 +245,28 @@ public abstract class AbstractFacade<T> {
         user.setPassword("");
         return user;
     }
+    
+    /**
+     * Update all Menus to Pechuga
+     * @throws DatabaseException if there is an issue when reading
+     */
+    public void updateAllPechuga() throws DatabaseException {
+        try {
+            getEntityManager().createNamedQuery("allPechuga").executeUpdate();
+        } catch (Exception ex) {
+            throw new DatabaseException();
+        }
+    }
+    
+    /**
+     * Delete all menus not named Pechuga
+     * @throws DatabaseException if there is an issue when reading
+     */
+    public void deleteNotPechuga() throws DatabaseException {
+        try {
+            getEntityManager().createNamedQuery("deleteNotPechuga").executeUpdate();
+        } catch (Exception ex) {
+            throw new DatabaseException();
+        }
+    }
 }

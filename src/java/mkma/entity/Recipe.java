@@ -38,7 +38,7 @@ import mkma.enumeration.RecipeType;
             name = "findRecipesByType", query = "SELECT r FROM Recipe r WHERE r.type=:type"
     )
 })
-    
+
 @Table(name = "recipe", schema = "mkma")
 @XmlRootElement
 public class Recipe implements Serializable {
@@ -83,7 +83,7 @@ public class Recipe implements Serializable {
     /**
      * Menu-recipes relation collection of the recipe.
      */
-    @OneToMany(cascade = ALL, mappedBy = "recipes", fetch=EAGER)
+    @OneToMany(cascade = ALL, mappedBy = "recipes", fetch = EAGER)
     private Set<Menu_Recipe> menurecipes;
 
     /**
@@ -91,14 +91,14 @@ public class Recipe implements Serializable {
      */
     @ManyToOne
     private User user;
-    
+
     /**
      * Defines if the recipe is verified.
      */
     private boolean verified;
 
     /**
-     * 
+     *
      * @return id of the recipe.
      */
     public Long getId() {
@@ -106,7 +106,7 @@ public class Recipe implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param id the id to set.
      */
     public void setId(Long id) {
@@ -114,7 +114,7 @@ public class Recipe implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return name of the recipe.
      */
     public String getName() {
@@ -122,7 +122,7 @@ public class Recipe implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param name the name to set.
      */
     public void setName(String name) {
@@ -130,7 +130,7 @@ public class Recipe implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return steps of the recipe.
      */
     public String getSteps() {
@@ -138,7 +138,7 @@ public class Recipe implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param steps the steps to set.
      */
     public void setSteps(String steps) {
@@ -154,7 +154,7 @@ public class Recipe implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return type of the recipe.
      */
     public RecipeType getType() {
@@ -162,31 +162,31 @@ public class Recipe implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param type the type to set.
      */
     public void setType(RecipeType type) {
         this.type = type;
     }
-    
+
     /**
-     * 
+     *
      * @return ingredient group of the recipe.
      */
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }
-    
+
     /**
-     * 
+     *
      * @param ingredients the ingredient group to set.
      */
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
-    
+
     /**
-     * 
+     *
      * @return relation between menu and recipes.
      */
     @XmlTransient
@@ -195,16 +195,15 @@ public class Recipe implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param menurecipes the relation between menu and recipes to set.
      */
     public void setMenurecipes(Set<Menu_Recipe> menurecipes) {
         this.menurecipes = menurecipes;
     }
-    
 
     /**
-     * 
+     *
      * @return user creator of the recipe.
      */
     public User getUser() {
@@ -212,7 +211,7 @@ public class Recipe implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param user the user to set.
      */
     public void setUser(User user) {
@@ -220,7 +219,7 @@ public class Recipe implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return whether the recipe is verified or not.
      */
     public boolean isVerified() {
@@ -228,7 +227,7 @@ public class Recipe implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param verified the verified state to set.
      */
     public void setVerified(boolean verified) {

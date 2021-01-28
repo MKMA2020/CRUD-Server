@@ -20,6 +20,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.DatatypeConverter;
 import mkma.entity.User;
 import mkma.enumeration.UserType;
 import mkma.exceptions.DatabaseException;
@@ -39,7 +40,6 @@ import mkma.security.Ciphering;
 public class UserFacadeREST extends AbstractFacade<User> {
 
     private Ciphering ciphering = new Ciphering();
-    private AlgorithmSHA hashPass = new AlgorithmSHA();
 
     @PersistenceContext(unitName = "mkmaPU")
     private EntityManager em;
@@ -54,7 +54,10 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
     public void create(User entity) throws DatabaseException {
         byte[] pass = ciphering.descifrarTexto(entity.getPassword());
-        String hashedPass = hashPass.encrypt(Arrays.toString(pass));
+        //String passWord = Arrays.toString(pass);
+        // passWord contains String with HEX symbols representing password.
+        String passWord = DatatypeConverter.printHexBinary(pass);
+        String hashedPass = AlgorithmSHA.encrypt(passWord);
         entity.setPassword(hashedPass);
         entity.setStatus(Boolean.TRUE);
         entity.setType(UserType.Normal);
@@ -145,7 +148,11 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Produces({MediaType.APPLICATION_XML})
     public User login(@PathParam("login") String login, @PathParam("password") String password) {
         byte[] pass = ciphering.descifrarTexto(password);
-        String hashedPass = hashPass.encrypt(Arrays.toString(pass));
+        //String passWord = Arrays.toString(pass);
+        // passWord contains String with HEX symbols representing password.
+        String passWord = DatatypeConverter.printHexBinary(pass);
+        
+        String hashedPass = AlgorithmSHA.encrypt(passWord);
         return super.userLogin(login, hashedPass);
     }
     
@@ -166,8 +173,9 @@ public class UserFacadeREST extends AbstractFacade<User> {
         String subject = "PocketChef: Your password has been reset!";
         String text = ("Hello " + t.getLogin()+ ", Your password has been reset, so here's your new one: " + newPass);
         mail.sendMail(email, subject, text);
+        
         // Set and encrypt new password to entity
-        t.setPassword(AlgorithmSHA.encrypt(newPass));
+        t.setPassword(AlgorithmSHA.encrypt(DatatypeConverter.printHexBinary(newPass.getBytes())));
         t.setLastsPasswordChange(new Date());
         
         super.edit(t);
