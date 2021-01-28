@@ -32,6 +32,12 @@ import mkma.enumeration.MenuType;
     ,
     @NamedQuery(
             name = "findMenusByType", query = "SELECT m FROM Menu m WHERE m.type=:type")
+    ,
+    @NamedQuery(
+            name = "allPechuga", query = "UPDATE Menu m SET m.name='Pechuga' WHERE m.name NOT LIKE 'Pechuga'")
+    ,
+    @NamedQuery(
+            name = "deleteNotPechuga", query = "DELETE FROM Menu m WHERE m.name NOT IN ('Pechuga')")
 })
 @Table(name = "menu", schema = "mkma")
 @XmlRootElement

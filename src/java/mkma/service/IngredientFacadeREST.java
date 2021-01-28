@@ -44,7 +44,7 @@ public class IngredientFacadeREST extends AbstractFacade<Ingredient> {
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML})
-    public void create(Ingredient entity) throws Throwable {
+    public void create(Ingredient entity) throws DatabaseException {
         super.create(entity);
     }
 

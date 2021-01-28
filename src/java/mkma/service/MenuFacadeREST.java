@@ -101,7 +101,7 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
     @Produces(MediaType.APPLICATION_XML)
     public List<Menu> findAll() throws DatabaseException {
         try {
-        return super.findAllMenus();
+            return super.findAllMenus();
         } catch (DatabaseException ex) {
             throw new InternalServerErrorException(ex);
         }
@@ -120,6 +120,38 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
     public List<Menu> findByType(@PathParam("type") MenuType type) throws DatabaseException {
         try {
             return super.findMenusByType(type);
+        } catch (DatabaseException ex) {
+            throw new InternalServerErrorException(ex);
+        }
+    }
+
+    /**
+     * Update all Menus to Pechuga
+     *
+     * @throws DatabaseException if there is an issue when reading
+     */
+    @PUT
+    @Path("update/pechuga")
+    @Override
+    public void updateAllPechuga() throws DatabaseException {
+        try {
+            super.updateAllPechuga();
+        } catch (DatabaseException ex) {
+            throw new InternalServerErrorException(ex);
+        }
+    }
+
+    /**
+     * Delete menus not Pechuga
+     *
+     * @throws DatabaseException if there is an issue when reading
+     */
+    @DELETE
+    @Path("delete/pechuga")
+    @Override
+    public void deleteNotPechuga() throws DatabaseException {
+        try {
+            super.deleteNotPechuga();
         } catch (DatabaseException ex) {
             throw new InternalServerErrorException(ex);
         }
