@@ -37,6 +37,10 @@ import mkma.enumeration.RecipeType;
     @NamedQuery(
             name = "findRecipesByType", query = "SELECT r FROM Recipe r WHERE r.type=:type"
     )
+    ,
+    @NamedQuery(
+            name = "updateDessertMoreThan300", query = "UPDATE Recipe r SET r.kcal=100 WHERE r.type LIKE 'Dessert' and r.kcal>300"
+    )
 })
 
 @Table(name = "recipe", schema = "mkma")

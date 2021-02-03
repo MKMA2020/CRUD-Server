@@ -269,4 +269,25 @@ public abstract class AbstractFacade<T> {
             throw new DatabaseException();
         }
     }
-}
+
+    /**
+     *
+     * @throws DatabaseException
+     */
+    public void updateRecipes() throws DatabaseException {
+        try {
+            getEntityManager().createNamedQuery("updateDessertMoreThan300").executeUpdate();
+        } catch (Exception ex) {
+            throw new DatabaseException();
+        }
+    }
+
+    public List<Recipe> findAllRecipesKcal() throws DatabaseException {
+    List<Recipe> recipes;
+         try {
+            recipes = getEntityManager().createNamedQuery("findAllLess").getResultList();
+        } catch (Exception ex) {
+            throw new DatabaseException();
+        }
+        return recipes;
+    }}

@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -95,6 +96,16 @@ public class RecipeFacadeREST extends AbstractFacade<Recipe> {
     @Produces({MediaType.APPLICATION_XML})
     public List<Recipe> findByType( @PathParam("type") RecipeType type) throws DatabaseException {
         return super.findRecipesByType(type);
+    }
+    @GET
+    @Path("update")
+    @Override
+    public void updateRecipes() throws DatabaseException {
+        try {
+            super.updateRecipes();
+        } catch (DatabaseException ex) {
+            throw new InternalServerErrorException(ex);
+        }
     }
    
 }
