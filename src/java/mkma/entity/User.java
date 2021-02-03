@@ -44,6 +44,10 @@ import mkma.enumeration.UserType;
     @NamedQuery(name = "login",
             query = "SELECT u FROM User u WHERE u.login=:login AND u.password=:password"
     )
+    ,
+    @NamedQuery(name = "updateLastAccess",
+            query = "UPDATE User u SET u.lastAccess = :date WHERE u.login = :login"
+    )
 })
 
 public class User implements Serializable {

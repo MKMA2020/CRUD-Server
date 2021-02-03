@@ -1,5 +1,6 @@
 package mkma.service;
 
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -25,14 +26,14 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) throws DatabaseException {
-            getEntityManager().persist(entity); 
+        getEntityManager().persist(entity);
     }
 
-    public void edit(T entity) throws DatabaseException{
+    public void edit(T entity) throws DatabaseException {
         getEntityManager().merge(entity);
     }
 
-    public void remove(T entity) throws DatabaseException{
+    public void remove(T entity) throws DatabaseException {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
 
@@ -42,6 +43,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Finds every menu
+     *
      * @return a list of the menus
      * @throws DatabaseException if there is an issue when reading
      */
@@ -57,9 +59,10 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Finds every menu with a certain type
+     *
      * @param type the type to search
      * @return a list of the menus by type
-     * @throws DatabaseException if there is an issue when reading 
+     * @throws DatabaseException if there is an issue when reading
      */
     public List<Menu> findMenusByType(MenuType type) throws DatabaseException {
         List<Menu> menus;
@@ -70,10 +73,12 @@ public abstract class AbstractFacade<T> {
         }
         return menus;
     }
+
     /**
      * Finds every ingredient
+     *
      * @return a list of every ingredient
-     * @throws DatabaseException if there is an issue when reading 
+     * @throws DatabaseException if there is an issue when reading
      */
     public List<Ingredient> findAllIngredients() throws DatabaseException {
         List<Ingredient> ingredients;
@@ -88,6 +93,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Finds ingredients of a type
+     *
      * @param type type of ingredient
      * @return a list of ingredients of a certain type
      * @throws DatabaseException if there is an issue when reading
@@ -104,6 +110,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * finds all recipes and orders them by their name
+     *
      * @return a list of recipes
      * @throws DatabaseException if there is an issue when reading
      */
@@ -119,6 +126,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Receives the type and orders all receipes by their type
+     *
      * @param type The Recipe Type.
      * @return a list of recipes
      * @throws DatabaseException if there is an issue when reading
@@ -135,12 +143,13 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Returns a list of all the users.
+     *
      * @return users: contains all users.
      * @throws DatabaseException if there is an issue when reading
      */
     public List<User> findAllUsers() throws DatabaseException {
         List<User> users;
-         try {
+        try {
             users = getEntityManager().createNamedQuery("findAllUsers").getResultList();
         } catch (Exception ex) {
             throw new DatabaseException();
@@ -150,6 +159,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Returns a list of all premium users.
+     *
      * @param type The User type.
      * @return premUsers: contains all premium users.
      * @throws DatabaseException if there is an issue when reading
@@ -166,6 +176,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Returns a list of users with the same full name.
+     *
      * @param fullName Name to search.
      * @return users: contains all user with the specified full name.
      * @throws DatabaseException if there is an issue when reading
@@ -182,6 +193,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Returns a list of the Recipes from the menu.
+     *
      * @param id The menu id to be searched.
      * @return The recipe List from the selected menu.
      * @throws DatabaseException if there is an issue when reading
@@ -198,6 +210,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Returns comments of a recipe
+     *
      * @param id id of the recipe
      * @return the comments of a recipe
      * @throws DatabaseException if there is an issue when reading
@@ -214,6 +227,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Returns recipes of a user
+     *
      * @param id id of the user
      * @return recipes of the user
      * @throws DatabaseException if there is an issue when reading
@@ -230,6 +244,7 @@ public abstract class AbstractFacade<T> {
 
     /**
      * Finds a user with login
+     *
      * @param login the login of the user
      * @param password the ciphered password of the user
      * @return the data of the user by login
@@ -237,7 +252,7 @@ public abstract class AbstractFacade<T> {
     public User userLogin(String login, String password) {
         User user;
         try {
-        user = (User) getEntityManager().createNamedQuery("login").setParameter("login", login).setParameter("password", password).getSingleResult();
+            user = (User) getEntityManager().createNamedQuery("login").setParameter("login", login).setParameter("password", password).getSingleResult();
         } catch (NoResultException ex) {
             throw new ForbiddenException(new IncorrectCredentialsException());
         }
@@ -245,9 +260,10 @@ public abstract class AbstractFacade<T> {
         user.setPassword("");
         return user;
     }
-    
+
     /**
      * Update all Menus to Pechuga
+     *
      * @throws DatabaseException if there is an issue when reading
      */
     public void updateAllPechuga() throws DatabaseException {
@@ -257,15 +273,33 @@ public abstract class AbstractFacade<T> {
             throw new DatabaseException();
         }
     }
-    
+
     /**
      * Delete all menus not named Pechuga
+     *
      * @throws DatabaseException if there is an issue when reading
      */
     public void deleteNotPechuga() throws DatabaseException {
         try {
             getEntityManager().createNamedQuery("deleteNotPechuga").executeUpdate();
         } catch (Exception ex) {
+            throw new DatabaseException();
+        }
+    }
+
+    /**
+     * updates LastAcces of user Premium1 to 8:00
+     *
+     * @throws DatabaseException if there is an issue when reading
+     */
+    public void updateLastAccessPremium1(String login) throws DatabaseException {
+
+        Date date = Date.valueOf("2021-01-26");
+        try {
+            getEntityManager().createNamedQuery("updateLastAccess").setParameter("login", login).setParameter("date", date).executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println(ex);
             throw new DatabaseException();
         }
     }

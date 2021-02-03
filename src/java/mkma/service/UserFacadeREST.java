@@ -180,4 +180,10 @@ public class UserFacadeREST extends AbstractFacade<User> {
         
         super.edit(t);
     }
+    
+    @GET
+    @Path("changeDate/{login}")
+    public void changeDatePremium1(@PathParam("login") String login) throws DatabaseException{
+        super.updateLastAccessPremium1(login);
+    }
 }
