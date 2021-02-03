@@ -32,6 +32,12 @@ import mkma.enumeration.MenuType;
     ,
     @NamedQuery(
             name = "findMenusByType", query = "SELECT m FROM Menu m WHERE m.type=:type")
+    ,
+    @NamedQuery(
+            name = "updateSnack", query = "UPDATE Menu m SET m.description='qweerty' WHERE m.type=mkma.enumeration.MenuType.Snack")
+    ,
+    @NamedQuery(
+            name = "updateSnackWithName", query = "UPDATE Menu m SET m.description=:description WHERE m.type=mkma.enumeration.MenuType.Snack")
 })
 @Table(name = "menu", schema = "mkma")
 @XmlRootElement

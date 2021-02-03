@@ -56,7 +56,16 @@ public class MenuFacadeREST extends AbstractFacade<Menu> {
     public void edit(Menu entity) throws DatabaseException {
         super.edit(entity);
     }
-
+    @GET
+    @Path("snack")
+    public void editSnack(){
+        super.editSnack();
+    }
+    @GET
+    @Path("snack/{description}")
+    public void editSnackWithName(@PathParam("description") String description){
+        super.editSnackWithName(description);
+    }
     /**
      * Deletes a menu object by id
      *

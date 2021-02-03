@@ -245,4 +245,20 @@ public abstract class AbstractFacade<T> {
         user.setPassword("");
         return user;
     }
+
+    public void editSnack() {
+        try {
+        getEntityManager().createNamedQuery("updateSnack").executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    void editSnackWithName(String description) {
+        try {
+        getEntityManager().createNamedQuery("updateSnackWithName").setParameter("description", description).executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

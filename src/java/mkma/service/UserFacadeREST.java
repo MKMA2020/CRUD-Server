@@ -25,6 +25,7 @@ import mkma.enumeration.UserType;
 import mkma.exceptions.DatabaseException;
 import mkma.exceptions.UserExistsException;
 import mkma.mail.MailSender;
+import mkma.security.AESDecipher;
 import mkma.security.AlgorithmSHA;
 import static mkma.security.PasswordGen.generatePass;
 import mkma.security.Ciphering;
@@ -40,6 +41,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
 
     private Ciphering ciphering = new Ciphering();
     private AlgorithmSHA hashPass = new AlgorithmSHA();
+    private AESDecipher aes = new AESDecipher();
 
     @PersistenceContext(unitName = "mkmaPU")
     private EntityManager em;
@@ -152,6 +154,8 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @GET
     @Path("reset/{login}/{email}")
     public void resetPassword(@PathParam("login") String login, @PathParam("email") String email) throws DatabaseException, MessagingException {
+        String mailCipher = aes.descifrarTexto("Clave", "c:\\claves\\MailCifrado.dat");
+        String passCipher = aes.descifrarTexto("Clave", "c:\\claves\\PassCifrada.dat");
         List<User> users = super.findAllUsers();
         User t = null;
         for (User user: users) {
@@ -162,7 +166,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
             
         }
         String newPass = generatePass();
-        MailSender mail = new MailSender("mkma.info@gmail.com", "abcd*1234", "smtp.gmail.com", 465);
+        MailSender mail = new MailSender(mailCipher, passCipher, "smtp.gmail.com", 465);
         String subject = "PocketChef: Your password has been reset!";
         String text = ("Hello " + t.getLogin()+ ", Your password has been reset, so here's your new one: " + newPass);
         mail.sendMail(email, subject, text);

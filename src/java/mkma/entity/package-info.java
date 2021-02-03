@@ -1,4 +1,4 @@
-package mkma.entity;
 /**
  * Contains the entities.
  */
+package mkma.entity;
